@@ -24,12 +24,21 @@ const Avatar = ({
     imageUrl === undefined ||
     imageUrl.length === 0;
   return shouldShowPlaceholder ? (
-    <Box
-      background="gray.200"
-      w={["100px", "130px"]}
-      h={["100px", "130px"]}
-      borderRadius="16px"
-    />
+    <Flex align="center" justify="center">
+      <Box
+        background="gray.200"
+        w={["100px", "130px"]}
+        h={["100px", "130px"]}
+        borderRadius="16px"
+      />
+      <Image
+        src="assets/placeholder-avatar.svg"
+        alt="check"
+        w={["52px", "64px"]}
+        h={["52px", "64px"]}
+        position="absolute"
+      />
+    </Flex>
   ) : (
     <Image
       src={imageUrl}
