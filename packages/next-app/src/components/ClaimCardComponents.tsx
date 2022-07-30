@@ -128,7 +128,7 @@ export const Header = ({
 }) => (
   <Flex align="center">
     <Avatar imageUrl={image} showPlaceholder={showPlaceholder} />
-    <Flex direction="column" ml={"20px"}>
+    <Flex direction="column" ml={"24px"}>
       {showLabel && (
         <Flex align="center">
           <Image
@@ -266,7 +266,6 @@ export const ClaimedView = (props: ClaimedViewProps) => {
           >
             <Text>VIEW CLAIM TRANSACTION</Text>
           </Button>
-
           <Button
             borderRadius="12px"
             borderColor="#08010D"
