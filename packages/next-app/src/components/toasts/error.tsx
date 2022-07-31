@@ -21,7 +21,7 @@ export const ErrorToast = ({
     border="2px"
     borderColor="#FF0042"
   >
-    <Flex mx="5" alignItems={"center"}>
+    <Flex align="center" justify="center" my="2">
       <WarningTwoIcon mr="5" color="#FF0042" />
       <Text fontSize="sm">
         {message}
