@@ -49,7 +49,8 @@ export const Wallet = ({ isConnected, isUnsupported }: WalletProps) => {
   const isToastOpen = useRef(false);
 
   const [{ data: networkData }, switchNetwork] = useNetwork();
-  const [{ data: connectData, error: connectError }, connect] = useConnect();
+  const [{ data: connectData, error: connectError, loading }, connect] =
+    useConnect();
 
   useEffect(() => {
     if (!isToastOpen.current && connectError) {
@@ -111,7 +112,7 @@ export const Wallet = ({ isConnected, isUnsupported }: WalletProps) => {
       <HStack width="full">
         <Button
           onClick={onOpen}
-          label="CONNECT WALLET"
+          label={loading ? "Connecting..." : "CONNECT WALLET"}
           buttonType={ButtonType.Connect}
           width="full"
         />
