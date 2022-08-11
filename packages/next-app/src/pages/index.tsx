@@ -23,28 +23,25 @@ import { SocialLinks } from "@/components/SocialLinks";
 import { SocialLinksMobile } from "@/components/SocialLinksMobile";
 import { bounceAnimation } from "@/chakra.config";
 
-// use live boolean to determine if we should show the claim page or coming soon page
-const live = false;
 
 const Home: NextPage = () => {
-  if (!live) {
-    // if not live, show a simple 'coming soon' page
-    return (
-          <Flex
-            m="0"
-            w="100vw"
-            h="100vh"
-            background="black"
-            align="center"
-            justifyContent="center"
-            textAlign={"center"}
-            >
-              <Heading as="h1" color="white" fontSize={"96px"} fontWeight="500">
-                Coming soon
-              </Heading>
-          </Flex>
-    );
-  } else {
+  // show a splash page while the code claim site is not live
+  return (
+        <Flex
+          m="0"
+          w="100vw"
+          h="100vh"
+          background="black"
+          align="center"
+          justifyContent="center"
+          textAlign={"center"}
+          >
+            <Heading as="h1" color="white" fontSize={"96px"} fontWeight="500">
+              Coming soon
+            </Heading>
+        </Flex>
+  );
+  /**
   const [{ data: networkData, error, loading }] = useNetwork();
   const [{ data: accountData }, disconnect] = useAccount({
     fetchEns: true,
@@ -200,7 +197,7 @@ const Home: NextPage = () => {
       </Box>
     </div>
   );
-  }
+  */
 };
 
 export default Home;
