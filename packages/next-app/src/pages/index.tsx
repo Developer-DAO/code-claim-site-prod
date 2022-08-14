@@ -10,6 +10,7 @@ import {
   Center,
   useBreakpointValue,
   usePrefersReducedMotion,
+  textDecoration,
 } from "@chakra-ui/react";
 import { useAccount, useNetwork } from "wagmi";
 import { useState, useEffect } from "react";
@@ -36,9 +37,17 @@ const Home: NextPage = () => {
           justifyContent="center"
           textAlign={"center"}
           >
-            <Heading as="h1" color="white" fontSize={"96px"} fontWeight="500">
-              Coming soon
-            </Heading>
+            <Box>
+              <Heading as="h1" color="white" fontSize={"96px"} fontWeight="500">
+                Coming soon
+              </Heading>
+              <Heading
+                as="h2"
+                marginTop={10}
+                >
+                <a href="https://developerdao.notion.site/The-CODE-Token-3c1e14dbc6bd461fa07978bf37d04fd9" style={{color:"white", textDecoration:"underline"}}>Learn More</a>
+              </Heading>
+            </Box>
         </Flex>
   );
   /**
