@@ -3,12 +3,14 @@ import Head from "next/head";
 import {
   Box,
   Flex,
+  Heading,
   SlideFade,
   Spacer,
   Image,
   Center,
   useBreakpointValue,
   usePrefersReducedMotion,
+  textDecoration,
 } from "@chakra-ui/react";
 import { useAccount, useNetwork } from "wagmi";
 import { useState, useEffect } from "react";
@@ -22,7 +24,33 @@ import { SocialLinks } from "@/components/SocialLinks";
 import { SocialLinksMobile } from "@/components/SocialLinksMobile";
 import { bounceAnimation } from "@/chakra.config";
 
+
 const Home: NextPage = () => {
+  // show a splash page while the code claim site is not live
+  return (
+        <Flex
+          m="0"
+          w="100vw"
+          h="100vh"
+          background="black"
+          align="center"
+          justifyContent="center"
+          textAlign={"center"}
+          >
+            <Box>
+              <Heading as="h1" color="white" fontSize={"96px"} fontWeight="500">
+                Coming soon
+              </Heading>
+              <Heading
+                as="h2"
+                marginTop={10}
+                >
+                <a href="https://developerdao.notion.site/The-CODE-Token-3c1e14dbc6bd461fa07978bf37d04fd9" style={{color:"white", textDecoration:"underline"}}>Learn More</a>
+              </Heading>
+            </Box>
+        </Flex>
+  );
+  /**
   const [{ data: networkData, error, loading }] = useNetwork();
   const [{ data: accountData }, disconnect] = useAccount({
     fetchEns: true,
@@ -178,6 +206,7 @@ const Home: NextPage = () => {
       </Box>
     </div>
   );
+  */
 };
 
 export default Home;
