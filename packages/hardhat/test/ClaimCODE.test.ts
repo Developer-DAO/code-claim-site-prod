@@ -133,8 +133,8 @@ describe('Claim CODE', function () {
     const leaf: Buffer = generateLeaf(formattedAddress, numTokens);
     // Generate airdrop proof
     const proof: string[] = merkleTree.getHexProof(leaf);
-    const ninetyOneDays = 91 * 24 * 60 * 60;
-    await ethers.provider.send('evm_increaseTime', [ninetyOneDays]);
+    const oneHundredEightyOneDays = 181 * 24 * 60 * 60;
+    await ethers.provider.send('evm_increaseTime', [oneHundredEightyOneDays]);
 
     await expect(users[1].ClaimCODE.claimTokens(numTokens, proof)).to.be.revertedWith('ClaimEnded()');
   });
@@ -188,8 +188,8 @@ describe('Claim CODE', function () {
 
     await expect(treasuryOwnedClaimCODE.sweep20(CODE.address)).to.be.revertedWith('ClaimNotEnded()');
 
-    const ninetyOneDays = 91 * 24 * 60 * 60;
-    await ethers.provider.send('evm_increaseTime', [ninetyOneDays]);
+    const oneHundredEightyOneDays = 181 * 24 * 60 * 60;
+    await ethers.provider.send('evm_increaseTime', [oneHundredEightyOneDays]);
 
     await treasuryOwnedClaimCODE.sweep20(CODE.address);
 
