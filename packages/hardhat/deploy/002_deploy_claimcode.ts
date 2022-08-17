@@ -9,8 +9,8 @@ const main: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployer, treasury } = await getNamedAccounts();
 
   const claimEndDate = new Date();
-  // claim period expired in 90 days
-  const claimEnd = Math.floor(claimEndDate.setDate(new Date().getDate() + 90) / 1000);
+  // claim period expired in 180 days ~ 6 months
+  const claimEnd = Math.floor(claimEndDate.setDate(new Date().getDate() + 180) / 1000);
   console.log('claimEnd', claimEnd);
 
   const codeContract = await ethers.getContract('CODE');
