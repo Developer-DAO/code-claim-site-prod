@@ -24,8 +24,8 @@ const main: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     args: [claimEnd, codeContract.address],
   });
 
-  await connectContract.transfer(treasury, ethers.utils.parseUnits((6_500_000).toString(), 18));
-  await connectContract.transfer(dd.address, ethers.utils.parseUnits((3_500_000).toString(), 18));
+  await connectContract.transfer(treasury, ethers.utils.parseUnits((6_600_000).toString(), 18));
+  await connectContract.transfer(dd.address, ethers.utils.parseUnits((3_400_000).toString(), 18));
 
   const claimContract = await ethers.getContract('ClaimCODE');
   const connectClaimContract = await claimContract.connect(await ethers.getSigner(deployer));

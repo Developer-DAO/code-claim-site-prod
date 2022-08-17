@@ -66,8 +66,8 @@ describe('Claim CODE', function () {
     const { treasury } = await getNamedAccounts();
     const treasuryBalance = await CODE.balanceOf(treasury);
     const airdropBalance = await CODE.balanceOf(ClaimCODE.address);
-    expect(treasuryBalance).to.equal(ethers.utils.parseUnits((6_500_000).toString(), TOKEN_DECIMALS));
-    expect(airdropBalance).to.equal(ethers.utils.parseUnits((3_500_000).toString(), TOKEN_DECIMALS));
+    expect(treasuryBalance).to.equal(ethers.utils.parseUnits((6_600_000).toString(), TOKEN_DECIMALS));
+    expect(airdropBalance).to.equal(ethers.utils.parseUnits((3_400_000).toString(), TOKEN_DECIMALS));
   });
 
   it('Deployment should assign treasury as the owner of claim contract', async function () {
