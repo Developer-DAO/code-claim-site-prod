@@ -40,6 +40,8 @@ const setup = deployments.createFixture(async () => {
 
   const { treasury } = await getNamedAccounts();
   const treasuryOwnedClaimCODE = await ClaimCODE.connect(await ethers.getSigner(treasury));
+  
+  await treasuryOwnedClaimCODE.unpause();
 
   await treasuryOwnedClaimCODE.setMerkleRoot(merkleRoot);
 
