@@ -9,15 +9,10 @@ import "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
-interface ICODE {
-    function delegate(address _delegatee) external;
-
-    function transfer(address recipient, uint256 amount) external returns (bool);
-}
-
 contract CODE is ERC20, ERC20Permit, AccessControl, ERC20Burnable, ERC20Votes {
     bytes32 public constant SWEEP_ROLE = keccak256("SWEEP_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+    bytes32 public constant DELEGATE_ROLE = keccak256("DELEGATE_ROLE");
 
     event Sweep20(address _token, address _to);
     event Sweep721(address _token, address _to, uint256 _tokenID);
@@ -31,17 +26,14 @@ contract CODE is ERC20, ERC20Permit, AccessControl, ERC20Burnable, ERC20Votes {
         _mint(_to, _amount);
     }
 
+    function claim_delegate(address _delegator, address _delegatee) external onlyRole(DELEGATE_ROLE) {
+        _delegate(_delegator, _delegatee);
+    }
+
     function sweep20(address _tokenAddr, address _to) external onlyRole(SWEEP_ROLE) {
         IERC20 token = IERC20(_tokenAddr);
         token.transfer(_to, token.balanceOf(address(this)));
         emit Sweep20(_tokenAddr, _to);
-    }
-
-    /**
-     * @dev Delegate votes from the sender to `delegatee`.
-     */
-    function delegate(address delegatee) public virtual override {
-        _delegate(_msgSender(), delegatee);
     }
 
     function sweep721(

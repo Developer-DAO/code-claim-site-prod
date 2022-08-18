@@ -39,7 +39,6 @@ const setup = deployments.createFixture(async () => {
   const users = await setupUsers(unnamedAccounts, { ClaimCODE });
 
   const { treasury } = await getNamedAccounts();
-  const codeAdmin = await CODE.connect(await ethers.getSigner(treasury));
   const treasuryOwnedClaimCODE = await ClaimCODE.connect(await ethers.getSigner(treasury));
 
   await treasuryOwnedClaimCODE.setMerkleRoot(merkleRoot);
@@ -92,7 +91,7 @@ describe('Claim CODE', function () {
     // Generate airdrop proof
     const proof: string[] = merkleTree.getHexProof(leaf);
 
-    await expect(users[0].ClaimCODE.claimTokens(numTokens, proof, users[0].address)).to.be.revertedWith(
+    await expect(users[0].ClaimCODE.claimTokens(numTokens, proof)).to.be.revertedWith(
       'InvalidProof()'
     );
     const delegatee = await CODE.delegates(users[0].address);
@@ -126,7 +125,7 @@ describe('Claim CODE', function () {
     const delegateeAfter = await CODE.delegates(users[1].address);
     expect(delegateeAfter).to.equal(users[1].address); // self delegation
 
-    await expect(users[1].ClaimCODE.claimTokens(correctNumTokens, correctProof, users[1].address)).to.be.revertedWith(
+    await expect(users[1].ClaimCODE.claimTokens(correctNumTokens, correctProof)).to.be.revertedWith(
       'AlreadyClaimed()'
     );
   });
@@ -146,7 +145,7 @@ describe('Claim CODE', function () {
     const ninetyOneDays = 91 * 24 * 60 * 60;
     await ethers.provider.send('evm_increaseTime', [ninetyOneDays]);
 
-    await expect(users[1].ClaimCODE.claimTokens(numTokens, proof, users[1].address)).to.be.revertedWith('ClaimEnded()');
+    await expect(users[1].ClaimCODE.claimTokens(numTokens, proof)).to.be.revertedWith('ClaimEnded()');
     const delegatee = await CODE.delegates(users[1].address);
     expect(delegatee).to.equal('0x0000000000000000000000000000000000000000'); // failed to delegate of failure of claim
   });
@@ -171,7 +170,7 @@ describe('Claim CODE', function () {
     const correctIndex = result[1].toNumber();
 
     await expect(
-      users[userId].ClaimCODE.claimTokens(correctNumTokens, correctProof, users[userId].address)
+      users[userId].ClaimCODE.claimTokens(correctNumTokens, correctProof)
     ).to.be.revertedWith('Pausable: paused');
 
     const delegatee = await CODE.delegates(users[1].address);
@@ -182,7 +181,7 @@ describe('Claim CODE', function () {
     const isClaimed = await ClaimCODE.isClaimed(correctIndex);
     expect(isClaimed).to.be.false;
 
-    await expect(users[userId].ClaimCODE.claimTokens(correctNumTokens, correctProof, users[userId].address))
+    await expect(users[userId].ClaimCODE.claimTokens(correctNumTokens, correctProof))
       .to.emit(ClaimCODE, 'Claim')
       .withArgs(correctFormattedAddress, ethers.utils.parseUnits(userAmount.toString(), TOKEN_DECIMALS));
 
