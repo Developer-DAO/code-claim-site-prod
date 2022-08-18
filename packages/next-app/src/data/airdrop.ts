@@ -1,5 +1,5 @@
-const airdrop = {
-  airdrop: {
+{
+  "airdrop": {
     "0xB2Ebc9b3a788aFB1E942eD65B59E9E49A1eE500D": {
       "nft": 400,
       "voter": 417.21,
@@ -26780,7 +26780,5 @@ const airdrop = {
       "voter": 417.21,
       "earlyContrib": 0
     }
-  },
-};
-
-export default airdrop;
+  }
+}
