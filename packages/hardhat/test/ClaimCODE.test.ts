@@ -39,6 +39,7 @@ const setup = deployments.createFixture(async () => {
   const users = await setupUsers(unnamedAccounts, { ClaimCODE });
 
   const { treasury } = await getNamedAccounts();
+  const codeAdmin = await CODE.connect(await ethers.getSigner(treasury));
   const treasuryOwnedClaimCODE = await ClaimCODE.connect(await ethers.getSigner(treasury));
 
   await treasuryOwnedClaimCODE.setMerkleRoot(merkleRoot);
@@ -50,6 +51,7 @@ const setup = deployments.createFixture(async () => {
   return {
     CODE,
     ClaimCODE,
+    codeAdmin,
     mockERC20,
     mockERC721,
     treasuryOwnedClaimCODE,
@@ -99,7 +101,7 @@ describe('Claim CODE', function () {
   });
 
   it('can claim correct allocation amount only', async function () {
-    const { users, merkleProof, merkleRoot, merkleTree, CODE, ClaimCODE } = await setup();
+    const { users, merkleProof, merkleRoot, merkleTree, CODE, ClaimCODE, codeAdmin } = await setup();
 
     // Get tokens for address correctly
     const correctFormattedAddress: string = ethers.utils.getAddress(users[1].address);
@@ -112,12 +114,28 @@ describe('Claim CODE', function () {
     const isClaimed = await ClaimCODE.isClaimed(correctIndex);
     expect(isClaimed).to.be.false;
 
+    const userBalance = await CODE.balanceOf(users[1].address);
+    expect(userBalance).to.equal(ethers.utils.parseUnits((0).toString(), TOKEN_DECIMALS));
+
+    const delegatee = await CODE.delegates(users[1].address);
+    expect(delegatee).to.equal('0x0000000000000000000000000000000000000000'); // no delegatee
+
+    const delegateRole = await CODE.DELEGATE_ROLE();
+    await codeAdmin.revokeRole(delegateRole, ClaimCODE.address);
+
+    // CODE delegation is guarded by DELEGATE_ROLE
+    await expect(users[1].ClaimCODE.claimTokens(correctNumTokens, correctProof)).to.be.revertedWith(
+      `AccessControl: account ${ClaimCODE.address.toLowerCase()} is missing role ${delegateRole}`
+    );
+
+    await codeAdmin.grantRole(delegateRole, ClaimCODE.address);
+
     await expect(users[1].ClaimCODE.claimTokens(correctNumTokens, correctProof))
       .to.emit(ClaimCODE, 'Claim')
       .withArgs(correctFormattedAddress, ethers.utils.parseUnits((100).toString(), TOKEN_DECIMALS));
 
-    const userBalance = await CODE.balanceOf(users[1].address);
-    expect(userBalance).to.equal(ethers.utils.parseUnits((100).toString(), TOKEN_DECIMALS));
+    const userBalanceAfter = await CODE.balanceOf(users[1].address);
+    expect(userBalanceAfter).to.equal(ethers.utils.parseUnits((100).toString(), TOKEN_DECIMALS));
 
     const isClaimedAfter = await ClaimCODE.isClaimed(correctIndex);
     expect(isClaimedAfter).to.be.true;
@@ -170,7 +188,7 @@ describe('Claim CODE', function () {
     const correctIndex = result[1].toNumber();
 
     await treasuryOwnedClaimCODE.pause();
-    
+
     await expect(
       users[userId].ClaimCODE.claimTokens(correctNumTokens, correctProof)
     ).to.be.revertedWith('Pausable: paused');
