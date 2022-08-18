@@ -60,7 +60,8 @@ async function main() {
       if (!(formattedAddress in airdrop)) {
         airdrop[formattedAddress] = tgeAmount;
       } else {
-        airdrop[formattedAddress] += tgeAmount;
+        const amount = airdrop[formattedAddress];
+        airdrop[formattedAddress] = parseFloat((amount + tgeAmount).toFixed(2));
       }
     }
   );
