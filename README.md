@@ -1,4 +1,5 @@
 [![MythXBadge](https://badgen.net/https/api.mythx.io/v1/projects/b24b61fa-1d1f-492c-aad9-8eb7bdbea289/badge/data?cache=300&icon=https://raw.githubusercontent.com/ConsenSys/mythx-github-badge/main/logo_white.svg)](https://docs.mythx.io/dashboard/github-badges)
+
 # DeveloperDAO $CODE contract & claim site
 
 A monorepo containing both the $CODE token contract & the claim web app.
@@ -39,7 +40,7 @@ Here is a list of the main scripts to run:
 Before deployment, we need to generate airdrop data first
 
 1. `./generate-airdrop.sh rinkeby` the script use `mainnet` as the default network
-2. Copy JSON data from `packages/hardhat/data/out/airdrop_ui_rinkeby.json` to `packages/next-app/src/data/airdrop.ts`
+2. Copy inner JSON data from `packages/hardhat/data/out/airdrop_ui_rinkeby.json` into the airdrop item in `packages/next-app/src/data/airdrop.ts`
 
 ### Deploying
 
