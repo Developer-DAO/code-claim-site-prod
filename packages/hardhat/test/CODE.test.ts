@@ -1,8 +1,24 @@
 import { expect } from './chai-setup';
-import { ethers, deployments, getNamedAccounts } from 'hardhat';
+import { ethers, deployments, getNamedAccounts, getUnnamedAccounts } from 'hardhat';
 import { CODE } from '../../next-app/src/typechain';
+import MerkleGenerator from '../utils/merkleGenerator';
 
 const TOKEN_DECIMALS = 18;
+
+const getMerkleInfo = deployments.createFixture(async () => {
+  const unnamedAccounts = await getUnnamedAccounts();
+  const airdrop = {
+    [unnamedAccounts[1]]: 100,
+    [unnamedAccounts[2]]: 200,
+    [unnamedAccounts[3]]: 300,
+  };
+  console.log(airdrop);
+
+  const generator = new MerkleGenerator(TOKEN_DECIMALS, airdrop);
+  const { merkleRoot, merkleTree } = await generator.process();
+
+  return { merkleRoot, merkleTree };
+});
 
 const setup = deployments.createFixture(async () => {
   await deployments.fixture(['CODE']);
@@ -33,6 +49,16 @@ const setup = deployments.createFixture(async () => {
 });
 
 describe('CODE', function () {
+  before(async function () {
+    // Setup the environment
+    const { treasury } = await getNamedAccounts();
+    const { merkleRoot } = await getMerkleInfo();
+    process.env = {
+      TREASURY_ADDRESS: treasury,
+      MERKLE_ROOT: merkleRoot,
+    };
+  });
+
   it('Only mint role can mint new token', async function () {
     const { CODE } = await setup();
     const { deployer, treasury } = await getNamedAccounts();

@@ -19,6 +19,7 @@ contract CODE is ERC20, ERC20Permit, AccessControl, ERC20Burnable, ERC20Votes {
 
     constructor(address _treasury) ERC20("Developer DAO", "CODE") ERC20Permit("Developer DAO") {
         _setupRole(DEFAULT_ADMIN_ROLE, _treasury);
+        _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
         _mint(_msgSender(), 10_000_000 * 1e18);
     }
 
