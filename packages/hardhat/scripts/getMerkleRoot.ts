@@ -6,7 +6,7 @@ import { generateLeaf } from '../test/utils/merkleUtils';
 
 const TOKEN_DECIMALS = 18;
 const TOKEN_AMOUNT_NFT = 400;
-const TOKEN_AMOUNT_VOTES_POAP = 399;
+const TOKEN_AMOUNT_VOTES_POAP = 417.21;
 
 const args = process.argv.slice(2);
 const nftHoldersPath = args[0];
