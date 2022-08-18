@@ -35,6 +35,7 @@ contract ClaimCODE is Ownable, Pausable {
         if (_codeToken == address(0)) revert Address0Error();
         claimPeriodEnds = _claimPeriodEnds;
         codeToken = ICODE(_codeToken);
+        _pause();
     }
 
     function verify(bytes32[] calldata _proof, bytes32 _leaf) public view returns (bool, uint256) {

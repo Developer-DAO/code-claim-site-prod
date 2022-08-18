@@ -9,8 +9,8 @@ const main: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployer, treasury } = await getNamedAccounts();
 
   const claimEndDate = new Date();
-  // claim period expired in 90 days
-  const claimEnd = Math.floor(claimEndDate.setDate(new Date().getDate() + 90) / 1000);
+  // claim period expired in 180 days ~ 6 months
+  const claimEnd = Math.floor(claimEndDate.setDate(new Date().getDate() + 180) / 1000);
   console.log('claimEnd', claimEnd);
 
   const codeContract = await ethers.getContract('CODE');
@@ -24,8 +24,8 @@ const main: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     args: [claimEnd, codeContract.address],
   });
 
-  await connectContract.transfer(treasury, ethers.utils.parseUnits((6_500_000).toString(), 18));
-  await connectContract.transfer(dd.address, ethers.utils.parseUnits((3_500_000).toString(), 18));
+  await connectContract.transfer(treasury, ethers.utils.parseUnits((6_600_000).toString(), 18));
+  await connectContract.transfer(dd.address, ethers.utils.parseUnits((3_400_000).toString(), 18));
 
   const claimContract = await ethers.getContract('ClaimCODE');
   const connectClaimContract = await claimContract.connect(await ethers.getSigner(deployer));

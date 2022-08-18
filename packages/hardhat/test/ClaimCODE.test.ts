@@ -41,6 +41,8 @@ const setup = deployments.createFixture(async () => {
   const { treasury } = await getNamedAccounts();
   const codeAdmin = await CODE.connect(await ethers.getSigner(treasury));
   const treasuryOwnedClaimCODE = await ClaimCODE.connect(await ethers.getSigner(treasury));
+  
+  await treasuryOwnedClaimCODE.unpause();
 
   await treasuryOwnedClaimCODE.setMerkleRoot(merkleRoot);
 
@@ -68,8 +70,8 @@ describe('Claim CODE', function () {
     const { treasury } = await getNamedAccounts();
     const treasuryBalance = await CODE.balanceOf(treasury);
     const airdropBalance = await CODE.balanceOf(ClaimCODE.address);
-    expect(treasuryBalance).to.equal(ethers.utils.parseUnits((6_500_000).toString(), TOKEN_DECIMALS));
-    expect(airdropBalance).to.equal(ethers.utils.parseUnits((3_500_000).toString(), TOKEN_DECIMALS));
+    expect(treasuryBalance).to.equal(ethers.utils.parseUnits((6_600_000).toString(), TOKEN_DECIMALS));
+    expect(airdropBalance).to.equal(ethers.utils.parseUnits((3_400_000).toString(), TOKEN_DECIMALS));
   });
 
   it('Deployment should assign treasury as the owner of claim contract', async function () {
@@ -160,8 +162,8 @@ describe('Claim CODE', function () {
     const leaf: Buffer = generateLeaf(formattedAddress, numTokens);
     // Generate airdrop proof
     const proof: string[] = merkleTree.getHexProof(leaf);
-    const ninetyOneDays = 91 * 24 * 60 * 60;
-    await ethers.provider.send('evm_increaseTime', [ninetyOneDays]);
+    const oneHundredEightyOneDays = 181 * 24 * 60 * 60;
+    await ethers.provider.send('evm_increaseTime', [oneHundredEightyOneDays]);
 
     await expect(users[1].ClaimCODE.claimTokens(numTokens, proof)).to.be.revertedWith('ClaimEnded()');
     const delegatee = await CODE.delegates(users[1].address);
@@ -223,8 +225,8 @@ describe('Claim CODE', function () {
 
     await expect(treasuryOwnedClaimCODE.sweep20(CODE.address)).to.be.revertedWith('ClaimNotEnded()');
 
-    const ninetyOneDays = 91 * 24 * 60 * 60;
-    await ethers.provider.send('evm_increaseTime', [ninetyOneDays]);
+    const oneHundredEightyOneDays = 181 * 24 * 60 * 60;
+    await ethers.provider.send('evm_increaseTime', [oneHundredEightyOneDays]);
 
     await treasuryOwnedClaimCODE.sweep20(CODE.address);
 

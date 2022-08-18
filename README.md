@@ -31,8 +31,8 @@ Here is a list of the main scripts to run:
 
 - Default dev environment, esp. when working on the web app: `yarn dev`
 - Spin-up the storybook for isolated UI development: `yarn storybook`
-- This will create the Merkle Tree: `yarn execute localhost scripts/getMerkleRoot data/nft_holders.json data/votes_and_poap_holders.json`
-- This script sets the merkle root hash on the contract: `yarn execute localhost scripts/setMerkleRoot`
+- This will create the Merkle Tree: `yarn execute localhost scripts/getMerkleRoot data/nft_holders.json data/votes_and_poap_holders.json data/final_early_contributor_amounts.json`
+- This script sets the merkle root hash on the contract: `yarn execute localhost scripts/setMerkleRoot.ts <merkle root>`
 
 ### Generating Airdrop Data
 
@@ -40,6 +40,7 @@ Before deployment, we need to generate airdrop data first
 
 1. `./generate-airdrop.sh rinkeby` the script use `mainnet` as the default network
 2. Copy JSON data from `packages/hardhat/data/out/airdrop_ui_rinkeby.json` to `packages/next-app/src/data/airdrop.ts`
+
 ### Deploying
 
 To deploy to Rinkeby, these are the steps:
