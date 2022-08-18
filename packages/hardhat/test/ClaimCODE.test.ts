@@ -169,6 +169,8 @@ describe('Claim CODE', function () {
     const result = await merkleProof.verify(correctProof, merkleRoot, correctLeaf);
     const correctIndex = result[1].toNumber();
 
+    await treasuryOwnedClaimCODE.pause();
+    
     await expect(
       users[userId].ClaimCODE.claimTokens(correctNumTokens, correctProof)
     ).to.be.revertedWith('Pausable: paused');
