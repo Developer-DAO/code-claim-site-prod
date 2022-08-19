@@ -195,7 +195,7 @@ export const ClaimCard = ({
         render: () => (
           <ConfirmToast
             message={`Successfully claimed ${totalAllocation} CODE tokens.`}
-            link={`https://etherscan.io/tx/${tx.hash}`}
+            link={`https://goerli.etherscan.io/tx/${tx.hash}`}
             link_message="View TX on Etherscan"
           />
         ),
@@ -259,7 +259,7 @@ export const ClaimCard = ({
           totalAllocation={totalAllocation.toString()}
           onAddCodeToMetaMask={addCodeToMetaMask}
           onViewTransaction={() =>
-            window.open(`https://etherscan.io/tx/${txHash}`, "_blank")
+            window.open(`https://goerli.etherscan.io/tx/${txHash}`, "_blank")
           }
         />
       )}
