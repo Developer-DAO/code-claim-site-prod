@@ -32,7 +32,7 @@ export function generateMerkleTree(airdrop: AirDrop): MerkleTree {
               allocation.nft +
               allocation.voter +
               allocation.earlyContrib
-            ).toString(),
+            ).toFixed(2),
             TOKEN_DECIMALS,
           )
           .toString(),
