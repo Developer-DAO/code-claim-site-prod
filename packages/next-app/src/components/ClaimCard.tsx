@@ -67,6 +67,12 @@ export const ClaimCard = ({
   const [{ data: waitTransaction }] = useWaitForTransaction({
     hash: txHash,
   });
+
+  const blockExplorerUrl =
+    chain.chain?.id === 5
+      ? `https://goerli.etherscan.io/tx/${txHash}`
+      : `https://etherscan.io/tx/${txHash}`;
+
   useEffect(() => {
     async function getThing() {
       if (waitTransaction?.blockNumber) {
@@ -201,11 +207,7 @@ export const ClaimCard = ({
         render: () => (
           <ConfirmToast
             message={`Successfully claimed ${totalAllocation} CODE tokens.`}
-            link={
-              chain.chain?.id == 1
-                ? `https://etherscan.io/tx/${tx.hash}`
-                : `https://georli.etherscan.io/tx/${tx.hash}`
-            }
+            link={blockExplorerUrl}
             link_message="View TX on Etherscan"
           />
         ),
@@ -268,14 +270,7 @@ export const ClaimCard = ({
           )}
           totalAllocation={totalAllocation.toString()}
           onAddCodeToMetaMask={addCodeToMetaMask}
-          onViewTransaction={() =>
-            chain.chain?.id == 1
-              ? window.open(`https://etherscan.io/tx/${txHash}`, "_blank")
-              : window.open(
-                  `https://goerli.etherscan.io/tx/${txHash}`,
-                  "_blank",
-                )
-          }
+          onViewTransaction={() => window.open(blockExplorerUrl, "_blank")}
         />
       )}
       {cardState !== ClaimCardState.claimed && (
