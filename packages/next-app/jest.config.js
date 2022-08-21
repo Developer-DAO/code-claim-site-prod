@@ -47,4 +47,5 @@ module.exports = {
     "/node_modules/",
     "^.+\\.module\\.(css|sass|scss)$",
   ],
+  snapshotSerializers: ["@emotion/jest/serializer"],
 };
