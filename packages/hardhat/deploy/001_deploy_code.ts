@@ -5,17 +5,16 @@ const main: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployments, getNamedAccounts } = hre;
   const { deploy } = deployments;
 
-  const { TREASURY_ADDRESS, MERKLE_ROOT } = process.env;
+  const { MERKLE_ROOT } = process.env;
 
-  if (!TREASURY_ADDRESS || !MERKLE_ROOT)
-    throw new Error('TREASURY_ADDRESS and MERKLE_ROOT must be set as environment variables');
+  if (!MERKLE_ROOT) throw new Error('MERKLE_ROOT must be set as environment variable');
 
-  const { deployer } = await getNamedAccounts();
+  const { deployer, treasury } = await getNamedAccounts();
 
   const dd = await deploy('CODE', {
     from: deployer,
     log: true,
-    args: [TREASURY_ADDRESS],
+    args: [treasury],
   });
 
   console.log('CODE contract deployer:', deployer);

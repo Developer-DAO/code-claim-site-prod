@@ -135,7 +135,7 @@ describe('CODE', function () {
     expect(contractBalanceAfter).to.equal(0);
   });
 
-  it('ensure claim contract dont receive Ether', async function () {
+  it('ensure token contract dont receive Ether', async function () {
     const { treasuryOwnedCODE } = await setup();
     const [deployer] = await ethers.getSigners();
     console.log(

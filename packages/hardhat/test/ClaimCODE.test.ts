@@ -24,7 +24,7 @@ const getMerkleInfo = deployments.createFixture(async () => {
 });
 
 const setup = deployments.createFixture(async () => {
-  await deployments.fixture(['ClaimCODE']);
+  await deployments.fixture(['CODE', 'ClaimCODE']);
 
   const unnamedAccounts = await getUnnamedAccounts();
 
@@ -107,9 +107,9 @@ describe('Claim CODE', function () {
     const { ClaimCODE } = await setup();
     const { merkleRoot } = await getMerkleInfo();
 
-    const setMerkleRoot = await ClaimCODE.merkleRoot();
+    const merkleRootOnContract = await ClaimCODE.merkleRoot();
 
-    expect(setMerkleRoot).to.equal(merkleRoot);
+    expect(merkleRootOnContract).to.equal(merkleRoot);
   });
 
   it('cannot claim if no allocation', async function () {
@@ -202,13 +202,6 @@ describe('Claim CODE', function () {
     await expect(users[1].ClaimCODE.claimTokens(numTokens, proof)).to.be.revertedWith('ClaimEnded()');
     const delegatee = await CODE.delegates(users[1].address);
     expect(delegatee).to.equal('0x0000000000000000000000000000000000000000'); // failed to delegate of failure of claim
-  });
-
-  it('cannot reset merkleroot', async function () {
-    const { treasuryOwnedClaimCODE } = await setup();
-    const { merkleRoot } = await getMerkleInfo();
-
-    await expect(treasuryOwnedClaimCODE.setMerkleRoot(merkleRoot)).to.be.revertedWith('InitError()');
   });
 
   it('cannot claim if contract is paused', async function () {
