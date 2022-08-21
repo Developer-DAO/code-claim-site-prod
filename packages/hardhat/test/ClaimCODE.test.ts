@@ -8,8 +8,9 @@ import MerkleGenerator from '../utils/merkleGenerator';
 
 const TOKEN_DECIMALS = 18;
 
-const getMerkleInfo = deployments.createFixture(async () => {
+const setup = deployments.createFixture(async () => {
   const unnamedAccounts = await getUnnamedAccounts();
+
   const airdrop = {
     [unnamedAccounts[1]]: 100,
     [unnamedAccounts[2]]: 200,
@@ -20,13 +21,12 @@ const getMerkleInfo = deployments.createFixture(async () => {
   const generator = new MerkleGenerator(TOKEN_DECIMALS, airdrop);
   const { merkleRoot, merkleTree } = await generator.process();
 
-  return { merkleRoot, merkleTree };
-});
+  process.env = {
+    ...process.env,
+    MERKLE_ROOT: merkleRoot,
+  };
 
-const setup = deployments.createFixture(async () => {
-  await deployments.fixture(['CODE', 'ClaimCODE']);
-
-  const unnamedAccounts = await getUnnamedAccounts();
+  await deployments.fixture(['ClaimCODE']);
 
   const merkleProofCf = await ethers.getContractFactory('MerkleProofWrapper');
   const merkleProof = await merkleProofCf.deploy();
@@ -61,22 +61,14 @@ const setup = deployments.createFixture(async () => {
     mockERC20,
     mockERC721,
     treasuryOwnedClaimCODE,
+    merkleTree,
+    merkleRoot,
     merkleProof,
     users,
   };
 });
 
 describe('Claim CODE', function () {
-  before(async function () {
-    // Setup the environment
-    const { treasury } = await getNamedAccounts();
-    const { merkleRoot } = await getMerkleInfo();
-    process.env = {
-      TREASURY_ADDRESS: treasury,
-      MERKLE_ROOT: merkleRoot,
-    };
-  });
-
   it('Deployment should assign treasury & airdrop supply of tokens correctly', async function () {
     const { CODE, ClaimCODE } = await setup();
     const { treasury } = await getNamedAccounts();
@@ -104,20 +96,13 @@ describe('Claim CODE', function () {
   });
 
   it('Deployment should set the correct Merkle Root', async function () {
-    const { ClaimCODE } = await setup();
-    const { merkleRoot } = await getMerkleInfo();
-
+    const { ClaimCODE, merkleRoot } = await setup();
     const merkleRootOnContract = await ClaimCODE.merkleRoot();
-
     expect(merkleRootOnContract).to.equal(merkleRoot);
   });
 
   it('cannot claim if no allocation', async function () {
-    const { CODE, users } = await setup();
-    const { merkleTree, merkleRoot } = await getMerkleInfo();
-
-    console.log(merkleRoot);
-    console.log(await users[0].ClaimCODE.merkleRoot());
+    const { CODE, users, merkleTree } = await setup();
 
     // Get properly formatted address
     const formattedAddress: string = ethers.utils.getAddress(users[0].address);
@@ -136,8 +121,7 @@ describe('Claim CODE', function () {
   });
 
   it('can claim correct allocation amount only', async function () {
-    const { users, merkleProof, CODE, ClaimCODE, codeAdmin } = await setup();
-    const { merkleRoot, merkleTree } = await getMerkleInfo();
+    const { users, merkleProof, CODE, ClaimCODE, codeAdmin, merkleRoot, merkleTree } = await setup();
 
     // Get tokens for address correctly
     const correctFormattedAddress: string = ethers.utils.getAddress(users[1].address);
@@ -183,8 +167,7 @@ describe('Claim CODE', function () {
   });
 
   it('cannot claim if claim period ends', async function () {
-    const { CODE, users } = await setup();
-    const { merkleTree } = await getMerkleInfo();
+    const { CODE, users, merkleTree } = await setup();
 
     // Get properly formatted address
     const formattedAddress: string = ethers.utils.getAddress(users[1].address);
@@ -205,8 +188,7 @@ describe('Claim CODE', function () {
   });
 
   it('cannot claim if contract is paused', async function () {
-    const { users, merkleProof, CODE, ClaimCODE, treasuryOwnedClaimCODE } = await setup();
-    const { merkleRoot, merkleTree } = await getMerkleInfo();
+    const { users, merkleProof, CODE, ClaimCODE, treasuryOwnedClaimCODE, merkleRoot, merkleTree } = await setup();
 
     const userId = 2;
     const userAmount = 200;
