@@ -208,11 +208,7 @@ export const ClaimedView = (props: ClaimedViewProps) => {
       <Flex direction="column" mb="10">
         <Box border="1px solid #08010D" opacity="8%" my="4" />
         <Box>
-          <Position
-            title="$CODE allocation"
-            value={totalAllocation}
-            isBig={true}
-          />
+          <Position title="$CODE" value={totalAllocation} isBig={true} />
           <Box mt="24px">
             <Text
               px="24px"
@@ -328,7 +324,7 @@ export const UnclaimedView = ({
         <Box border="1px solid #08010D" opacity="8%" />
         <Box mt="6">
           <Position
-            title="$CODE allocation"
+            title="$CODE"
             value={totalAllocation.toString()}
             isBig={true}
           />
