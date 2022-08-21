@@ -6,7 +6,7 @@ Array [
   margin: 0px;
   width: 100vw;
   height: 100vh;
-  background: blue;
+  background: var(--chakra-colors-white);
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
 }
