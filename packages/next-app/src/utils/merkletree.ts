@@ -101,7 +101,7 @@ export function getMerkleTreeValues(
   tokenAmount: number,
 ) {
   const numTokens = ethers.utils
-    .parseUnits(tokenAmount.toString(), TOKEN_DECIMALS)
+    .parseUnits(tokenAmount.toFixed(2).toString(), TOKEN_DECIMALS)
     .toString();
 
   const leaf = generateLeaf(ethers.utils.getAddress(address), numTokens);
