@@ -9,18 +9,6 @@ import MerkleGenerator from '../utils/merkleGenerator';
 const TOKEN_DECIMALS = 18;
 
 const setup = deployments.createFixture(async () => {
-  const unnamedAccounts = await getUnnamedAccounts();
-
-  const airdrop = {
-    [unnamedAccounts[1]]: 100,
-    [unnamedAccounts[2]]: 200,
-    [unnamedAccounts[3]]: 300,
-  };
-  console.log(airdrop);
-
-  const generator = new MerkleGenerator(TOKEN_DECIMALS, airdrop);
-  const { merkleRoot, merkleTree } = await generator.process();
-
   await deployments.fixture(['ClaimCODE']);
 
   const merkleProofCf = await ethers.getContractFactory('MerkleProofWrapper');
@@ -34,6 +22,18 @@ const setup = deployments.createFixture(async () => {
   const mockERC721Cf = await ethers.getContractFactory('MockERC721');
   const mockERC721 = await mockERC721Cf.deploy();
   await mockERC721.deployed();
+
+  const unnamedAccounts = await getUnnamedAccounts();
+
+  const airdrop = {
+    [unnamedAccounts[1]]: 100,
+    [unnamedAccounts[2]]: 200,
+    [unnamedAccounts[3]]: 300,
+  };
+  console.log(airdrop);
+
+  const generator = new MerkleGenerator(TOKEN_DECIMALS, airdrop);
+  const { merkleRoot, merkleTree } = await generator.process();
 
   const CODE = <CODE>await ethers.getContract('CODE');
   const ClaimCODE = <ClaimCODE>await ethers.getContract('ClaimCODE');
@@ -80,7 +80,7 @@ describe('Claim CODE', function () {
     expect(treasury).to.equal(owner);
   });
 
-  it('Deployment should revoke admin role of deployer & only leave only treasury as admin', async function () {
+  it('Deployment should revoke admin role of deployer & leave only treasury as admin', async function () {
     const { CODE } = await setup();
     const { deployer, treasury } = await getNamedAccounts();
     const adminRole = await CODE.DEFAULT_ADMIN_ROLE();
@@ -116,7 +116,7 @@ describe('Claim CODE', function () {
   });
 
   it('can claim correct allocation amount only', async function () {
-    const { users, merkleProof, CODE, ClaimCODE, codeAdmin, merkleRoot, merkleTree } = await setup();
+    const { users, merkleProof, merkleRoot, merkleTree, CODE, ClaimCODE, codeAdmin } = await setup();
 
     // Get tokens for address correctly
     const correctFormattedAddress: string = ethers.utils.getAddress(users[1].address);
@@ -183,7 +183,7 @@ describe('Claim CODE', function () {
   });
 
   it('cannot claim if contract is paused', async function () {
-    const { users, merkleProof, CODE, ClaimCODE, treasuryOwnedClaimCODE, merkleRoot, merkleTree } = await setup();
+    const { users, merkleRoot, merkleProof, merkleTree, CODE, ClaimCODE, treasuryOwnedClaimCODE } = await setup();
 
     const userId = 2;
     const userAmount = 200;
