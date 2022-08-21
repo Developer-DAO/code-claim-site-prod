@@ -26770,16 +26770,6 @@ const airdrop = {
       voter: 0,
       earlyContrib: 60.2,
     },
-    "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC": {
-      nft: 400,
-      voter: 0,
-      earlyContrib: 0,
-    },
-    "0x90F79bf6EB2c4f870365E785982E1f101E93b906": {
-      nft: 400,
-      voter: 417.21,
-      earlyContrib: 0,
-    },
   },
 };
 
