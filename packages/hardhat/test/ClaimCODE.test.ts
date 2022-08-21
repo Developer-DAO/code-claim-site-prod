@@ -21,11 +21,6 @@ const setup = deployments.createFixture(async () => {
   const generator = new MerkleGenerator(TOKEN_DECIMALS, airdrop);
   const { merkleRoot, merkleTree } = await generator.process();
 
-  process.env = {
-    ...process.env,
-    MERKLE_ROOT: merkleRoot,
-  };
-
   await deployments.fixture(['ClaimCODE']);
 
   const merkleProofCf = await ethers.getContractFactory('MerkleProofWrapper');

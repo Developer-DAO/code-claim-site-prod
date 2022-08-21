@@ -1,15 +1,20 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { DeployFunction } from 'hardhat-deploy/types';
 
+import { getMerkleRoot } from '../utils/merkleRoot';
 import { ClaimCODE } from '../../next-app/src/typechain';
 
 const main: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
-  const { ethers, deployments, getNamedAccounts } = hre;
+  const { ethers, deployments, getNamedAccounts, getChainId } = hre;
   const { deploy } = deployments;
 
-  const { MERKLE_ROOT } = process.env;
+  const chainId = await getChainId();
+  console.log('Deploying ClaimCODE to ChainID', chainId);
 
-  if (!MERKLE_ROOT) throw new Error('MERKLE_ROOT must be set as environment variable');
+  // get merkleRoot for testing or production, based on chainId
+  const merkleRoot = await getMerkleRoot(chainId);
+
+  console.log('Using merkleRoot', merkleRoot);
 
   // the treasury account is the DAO multi-sig wallet in production
   const { deployer, treasury } = await getNamedAccounts();
@@ -27,7 +32,7 @@ const main: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const dd = await deploy('ClaimCODE', {
     from: deployer,
     log: true,
-    args: [claimEnd, codeContract.address, MERKLE_ROOT],
+    args: [claimEnd, codeContract.address, merkleRoot],
   });
 
   await connectContract.transfer(treasury, ethers.utils.parseUnits((6_600_000).toString(), 18));
