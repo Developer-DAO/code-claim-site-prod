@@ -11,11 +11,16 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
+        name: "_delegator",
+        type: "address",
+      },
+      {
+        internalType: "address",
         name: "_delegatee",
         type: "address",
       },
     ],
-    name: "delegate",
+    name: "claim_delegate",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

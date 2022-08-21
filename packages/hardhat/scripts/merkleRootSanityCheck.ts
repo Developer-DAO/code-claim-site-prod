@@ -16,7 +16,7 @@ async function main() {
   console.log('claim contract address:', claimContract.address);
   const contractMerkleRoot = await claimContract.merkleRoot();
   console.log('contract merkle root:', contractMerkleRoot);
-  equal(merkleTree.getHexRoot(), contractMerkleRoot, "merkle root assert fail");
+  equal(merkleTree.getHexRoot(), contractMerkleRoot, 'merkle root assert fail');
 
   const arr = Object.entries(airdrop);
 
@@ -33,8 +33,8 @@ async function main() {
       const [isVerified, index] = await claimContract.verify(proof, leaf);
 
       // ensure the verify logic used in frontend is exactly the same with the contract
-      ok(isVerifiedLocal, "proof not verify locally");
-      ok(isVerified, "proof not verify online");
+      ok(isVerifiedLocal, 'proof not verify locally');
+      ok(isVerified, 'proof not verify online');
       equal(indexLocal, index.toNumber(), `proof index assert fail ${indexLocal} != ${index.toNumber()}`);
       ok(indexLocal >= 0, `proof index ${indexLocal} illformed`);
 
@@ -44,7 +44,7 @@ async function main() {
   }
 
   // ensure each idx is unique
-  ok(idxEntries.size == arr.length, "duplicated proof index");
+  ok(idxEntries.size == arr.length, 'duplicated proof index');
   console.log('sanity checked for indexes');
 }
 
