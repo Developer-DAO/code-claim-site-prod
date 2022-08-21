@@ -71,7 +71,7 @@ const Home: NextPage = () => {
         m="0"
         w="100vw"
         h="100vh"
-        background="blue"
+        background="white"
         scrollSnapType={{ base: "y mandatory", lg: "none" }}
         overflowY={{ base: "scroll", lg: "clip" }}
       >
