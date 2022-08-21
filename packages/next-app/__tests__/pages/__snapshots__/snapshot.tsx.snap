@@ -28,7 +28,7 @@ Array [
           className="css-1107s9w"
         >
           <div
-            className="css-j3c8bm"
+            className="css-jhh3s"
           >
             <div
               className="css-70qvj9"
@@ -41,57 +41,61 @@ Array [
             </div>
           </div>
           <div
-            className="css-1id13ok"
+            className="css-l84sf8"
           >
-            <h1
-              className="chakra-heading css-1nyswaf"
-            >
-              Airdrop
-            </h1>
-            <p
-              className="chakra-text css-1o3hbk9"
-            >
-              $CODE is the new governance token for Developer DAO. Connect your wallet to determine your airdrop eligibility.
-            </p>
             <div
-              className="css-obc5ee"
+              className="css-1lgwuec"
             >
+              <h1
+                className="chakra-heading css-1nyswaf"
+              >
+                Airdrop
+              </h1>
+              <p
+                className="chakra-text css-1o3hbk9"
+              >
+                $CODE is the new governance token for Developer DAO. Connect your wallet to determine your airdrop eligibility.
+              </p>
               <div
-                className="css-16pvocw"
+                className="css-obc5ee"
               >
                 <div
-                  className="chakra-stack css-1d0c3h9"
+                  className="css-16pvocw"
+                >
+                  <div
+                    className="chakra-stack css-1d0c3h9"
+                  >
+                    <button
+                      className="chakra-button css-1aknvb1"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <div
+                        className="css-1jqno4x"
+                      >
+                        CONNECT WALLET
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <a
+                  className="chakra-link css-f4h6uy"
+                  href="https://developerdao.notion.site/The-CODE-Token-3c1e14dbc6bd461fa07978bf37d04fd9"
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   <button
-                    className="chakra-button css-1aknvb1"
-                    onClick={[Function]}
+                    className="chakra-button css-oqzrty"
                     type="button"
                   >
                     <div
                       className="css-1jqno4x"
                     >
-                      CONNECT WALLET
+                      LEARN MORE
                     </div>
                   </button>
-                </div>
+                </a>
               </div>
-              <a
-                className="chakra-link css-f4h6uy"
-                href="https://developerdao.notion.site/The-CODE-Token-3c1e14dbc6bd461fa07978bf37d04fd9"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <button
-                  className="chakra-button css-oqzrty"
-                  type="button"
-                >
-                  <div
-                    className="css-1jqno4x"
-                  >
-                    LEARN MORE
-                  </div>
-                </button>
-              </a>
             </div>
           </div>
           <div
@@ -99,7 +103,7 @@ Array [
           />
         </div>
         <div
-          className="css-1s92duk"
+          className="css-1tlubjq"
         >
           <div
             className="css-ixvcpa"
@@ -127,10 +131,19 @@ Array [
                     className="css-70qvj9"
                   >
                     <div
-                      className="css-qqeux9"
-                    />
+                      className="css-gmuwbf"
+                    >
+                      <div
+                        className="css-qqeux9"
+                      />
+                      <img
+                        alt="check"
+                        className="chakra-image css-1vawe69"
+                        src="assets/placeholder-avatar.svg"
+                      />
+                    </div>
                     <div
-                      className="css-1wc4c43"
+                      className="css-agnjr6"
                     >
                       <p
                         className="chakra-text css-fh9fau"
