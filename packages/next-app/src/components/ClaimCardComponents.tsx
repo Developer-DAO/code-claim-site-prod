@@ -55,16 +55,17 @@ const ButtonPlaceholder = () => (
 );
 
 const ClaimButton = ({
-  label,
+  allocation,
   onClick,
 }: {
-  label: string;
+  allocation: number;
   onClick: MouseEventHandler<HTMLButtonElement>;
 }) => (
   <Button
     background="#08010D"
     borderRadius="12px"
     color="#FFF"
+    disabled={allocation <= 0}
     fontSize={["16px", "18px"]}
     fontWeight="900"
     w="100%"
@@ -77,13 +78,16 @@ const ClaimButton = ({
     }}
     onClick={onClick}
   >
-    <Text>
-      CLAIM{" "}
-      <span style={{ fontFamily: "IBM Plex Mono", fontWeight: 600 }}>
-        {label}
-      </span>{" "}
-      TOKENS
-    </Text>
+    {allocation > 0 && (
+      <Text>
+        CLAIM{" "}
+        <span style={{ fontFamily: "IBM Plex Mono", fontWeight: 600 }}>
+          {allocation.toString()}
+        </span>{" "}
+        TOKENS
+      </Text>
+    )}
+    {allocation <= 0 && <Text>No $CODE to claim</Text>}
   </Button>
 );
 
@@ -294,7 +298,7 @@ export const ClaimedView = (props: ClaimedViewProps) => {
 interface UnclaimedViewProps {
   cardState: ClaimCardState;
   positions: { title: string; value: number }[];
-  totalAllocation: string;
+  totalAllocation: number;
   onClickClaim: () => void;
 }
 
@@ -325,7 +329,7 @@ export const UnclaimedView = ({
         <Box mt="6">
           <Position
             title="$CODE allocation"
-            value={totalAllocation}
+            value={totalAllocation.toString()}
             isBig={true}
           />
         </Box>
@@ -334,9 +338,9 @@ export const UnclaimedView = ({
         {cardState === ClaimCardState.disconnected ? (
           <ButtonPlaceholder />
         ) : cardState === ClaimCardState.isClaiming ? (
-          <IsClaimingButton label={totalAllocation} />
+          <IsClaimingButton label={totalAllocation.toString()} />
         ) : (
-          <ClaimButton label={totalAllocation} onClick={onClickClaim} />
+          <ClaimButton allocation={totalAllocation} onClick={onClickClaim} />
         )}
       </Box>
     </>
