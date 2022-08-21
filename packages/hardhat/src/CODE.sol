@@ -1,6 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
+import "./ICODE.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -9,7 +10,7 @@ import "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
-contract CODE is ERC20, ERC20Permit, AccessControl, ERC20Burnable, ERC20Votes {
+contract CODE is ICODE, ERC20Permit, AccessControl, ERC20Burnable, ERC20Votes {
     bytes32 public constant SWEEP_ROLE = keccak256("SWEEP_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant DELEGATE_ROLE = keccak256("DELEGATE_ROLE");
