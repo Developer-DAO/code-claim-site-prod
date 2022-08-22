@@ -62,13 +62,9 @@ const provider = ({ chainId, connector }: GetProviderArgs) => {
         infura: infuraId,
       });
     case "goerli":
-      return ethers.getDefaultProvider(chain.goerli.id, {
-        infura: infuraId,
-      });
+      return new ethers.providers.InfuraProvider(chain.goerli.id, infuraId);
     case "mainnet":
-      return ethers.getDefaultProvider(chain.mainnet.id, {
-        infura: infuraId,
-      });
+      return new ethers.providers.InfuraProvider(chain.mainnet.id, infuraId);
     default:
       console.error("Unsupported chainName:", chainName);
       break;
