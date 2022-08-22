@@ -30,7 +30,6 @@ interface ClaimCODEInterface extends ethers.utils.Interface {
     "pause()": FunctionFragment;
     "paused()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setMerkleRoot(bytes32)": FunctionFragment;
     "sweep20(address)": FunctionFragment;
     "sweep721(address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
@@ -61,10 +60,6 @@ interface ClaimCODEInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined,
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMerkleRoot",
-    values: [BytesLike],
   ): string;
   encodeFunctionData(functionFragment: "sweep20", values: [string]): string;
   encodeFunctionData(
@@ -99,10 +94,6 @@ interface ClaimCODEInterface extends ethers.utils.Interface {
     functionFragment: "renounceOwnership",
     data: BytesLike,
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMerkleRoot",
-    data: BytesLike,
-  ): Result;
   decodeFunctionResult(functionFragment: "sweep20", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "sweep721", data: BytesLike): Result;
   decodeFunctionResult(
@@ -114,7 +105,6 @@ interface ClaimCODEInterface extends ethers.utils.Interface {
 
   events: {
     "Claim(address,uint256)": EventFragment;
-    "MerkleRootChanged(bytes32)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Paused(address)": EventFragment;
     "Sweep20(address)": EventFragment;
@@ -123,7 +113,6 @@ interface ClaimCODEInterface extends ethers.utils.Interface {
   };
 
   getEvent(nameOrSignatureOrTopic: "Claim"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "MerkleRootChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Sweep20"): EventFragment;
@@ -133,10 +122,6 @@ interface ClaimCODEInterface extends ethers.utils.Interface {
 
 export type ClaimEvent = TypedEvent<
   [string, BigNumber] & { _claimant: string; _amount: BigNumber }
->;
-
-export type MerkleRootChangedEvent = TypedEvent<
-  [string] & { _merkleRoot: string }
 >;
 
 export type OwnershipTransferredEvent = TypedEvent<
@@ -226,11 +211,6 @@ export class ClaimCODE extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> },
     ): Promise<ContractTransaction>;
 
-    setMerkleRoot(
-      _merkleRoot: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> },
-    ): Promise<ContractTransaction>;
-
     sweep20(
       _tokenAddr: string,
       overrides?: Overrides & { from?: string | Promise<string> },
@@ -281,11 +261,6 @@ export class ClaimCODE extends BaseContract {
   paused(overrides?: CallOverrides): Promise<boolean>;
 
   renounceOwnership(
-    overrides?: Overrides & { from?: string | Promise<string> },
-  ): Promise<ContractTransaction>;
-
-  setMerkleRoot(
-    _merkleRoot: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> },
   ): Promise<ContractTransaction>;
 
@@ -341,11 +316,6 @@ export class ClaimCODE extends BaseContract {
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    setMerkleRoot(
-      _merkleRoot: BytesLike,
-      overrides?: CallOverrides,
-    ): Promise<void>;
-
     sweep20(_tokenAddr: string, overrides?: CallOverrides): Promise<void>;
 
     sweep721(
@@ -384,14 +354,6 @@ export class ClaimCODE extends BaseContract {
       [string, BigNumber],
       { _claimant: string; _amount: BigNumber }
     >;
-
-    "MerkleRootChanged(bytes32)"(
-      _merkleRoot?: null,
-    ): TypedEventFilter<[string], { _merkleRoot: string }>;
-
-    MerkleRootChanged(
-      _merkleRoot?: null,
-    ): TypedEventFilter<[string], { _merkleRoot: string }>;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,
@@ -474,11 +436,6 @@ export class ClaimCODE extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> },
     ): Promise<BigNumber>;
 
-    setMerkleRoot(
-      _merkleRoot: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> },
-    ): Promise<BigNumber>;
-
     sweep20(
       _tokenAddr: string,
       overrides?: Overrides & { from?: string | Promise<string> },
@@ -533,11 +490,6 @@ export class ClaimCODE extends BaseContract {
     paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     renounceOwnership(
-      overrides?: Overrides & { from?: string | Promise<string> },
-    ): Promise<PopulatedTransaction>;
-
-    setMerkleRoot(
-      _merkleRoot: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> },
     ): Promise<PopulatedTransaction>;
 

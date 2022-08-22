@@ -19,7 +19,6 @@ contract ClaimCODE is Ownable, Pausable {
 
     ICODE public immutable codeToken;
 
-    event MerkleRootChanged(bytes32 _merkleRoot);
     event Claim(address indexed _claimant, uint256 _amount);
     event Sweep20(address _token);
     event Sweep721(address _token, uint256 _tokenID);
@@ -31,10 +30,15 @@ contract ClaimCODE is Ownable, Pausable {
     error ClaimNotEnded();
     error InitError();
 
-    constructor(uint256 _claimPeriodEnds, address _codeToken) {
+    constructor(
+        uint256 _claimPeriodEnds,
+        address _codeToken,
+        bytes32 _merkleRoot
+    ) {
         if (_codeToken == address(0)) revert Address0Error();
         claimPeriodEnds = _claimPeriodEnds;
         codeToken = ICODE(_codeToken);
+        merkleRoot = _merkleRoot;
         _pause();
     }
 
@@ -58,12 +62,6 @@ contract ClaimCODE is Ownable, Pausable {
 
     function isClaimed(uint256 _index) public view returns (bool) {
         return claimed.get(_index);
-    }
-
-    function setMerkleRoot(bytes32 _merkleRoot) external onlyOwner {
-        if (merkleRoot != bytes32(0)) revert InitError();
-        merkleRoot = _merkleRoot;
-        emit MerkleRootChanged(_merkleRoot);
     }
 
     function sweep20(address _tokenAddr) external onlyOwner {

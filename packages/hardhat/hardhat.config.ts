@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-import { HardhatUserConfig } from 'hardhat/config';
+import { HardhatUserConfig } from 'hardhat/types';
 import '@nomiclabs/hardhat-etherscan';
 import 'hardhat-deploy';
 import '@nomiclabs/hardhat-ethers';
@@ -32,8 +32,14 @@ const config: HardhatUserConfig = {
     ],
   },
   namedAccounts: {
-    deployer: 0,
-    treasury: 1,
+    deployer: {
+      default: 0,
+      mainnet: 0,
+    },
+    treasury: {
+      default: 1,
+      mainnet: '0x7128f5ff32eD07Ce12E6a9deBE32BB40F9884b3C',
+    },
   },
   networks: {
     hardhat: {

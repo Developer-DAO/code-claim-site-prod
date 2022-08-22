@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { useContract, useProvider } from "wagmi";
+import { useProvider } from "wagmi";
 
-import { CODEToken, ClaimCODE__factory } from "@/typechain";
+import { ClaimCODE__factory } from "@/typechain";
 import { getContractAddress } from "@/utils";
-import { ethers } from "ethers";
 
 type ContractInfo = {
   claimPeriodEnds: Date | undefined;
