@@ -44,13 +44,12 @@ Before deployment, we need to generate airdrop data first
 
 ### Deploying
 
-To deploy to Rinkeby, these are the steps:
+To deploy to **Mainnet**, these are the steps:
 
 1. Set env vars ETH_NODE_URI = 'https://rinkeby.infura.io/v3/$projectId' (or other node services e.g. alchemy, quicknode), MNEMONIC = 'words words words.... words'
-2. `yarn deploy rinkeby`
-3. `yarn execute rinkeby scripts/setMerkleRoot <merkleRoot>`
-4. `cd packages/hardhat && npx hardhat --network rinkeby etherscan-verify --api-key <etherscan API key>`
-5. `yarn execute rinkeby scripts/merkleRootSanityCheck`
+2. `yarn deploy mainnet`
+3. `cd packages/hardhat && npx hardhat --network mainnet etherscan-verify --api-key <etherscan API key>`
+4. `yarn execute mainnet scripts/merkleRootSanityCheck`
 
 The code that gets network specific resources from env variables (like ETH_NODE_URI and MNEMONIC) is located at `packages/hardhat/utils/network.ts`.
 To change how e.g. the accounts are defined (by setting PKs directly instead of using mnemonic), the `accounts` function in that file would need to be changed. This function is then used in hardhat.config.ts to get the accounts info per network.
