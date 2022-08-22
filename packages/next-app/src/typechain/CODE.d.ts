@@ -22,6 +22,7 @@ import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 interface CODEInterface extends ethers.utils.Interface {
   functions: {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
+    "DELEGATE_ROLE()": FunctionFragment;
     "DOMAIN_SEPARATOR()": FunctionFragment;
     "MINTER_ROLE()": FunctionFragment;
     "SWEEP_ROLE()": FunctionFragment;
@@ -31,6 +32,7 @@ interface CODEInterface extends ethers.utils.Interface {
     "burn(uint256)": FunctionFragment;
     "burnFrom(address,uint256)": FunctionFragment;
     "checkpoints(address,uint32)": FunctionFragment;
+    "claim_delegate(address,address)": FunctionFragment;
     "decimals()": FunctionFragment;
     "decreaseAllowance(address,uint256)": FunctionFragment;
     "delegate(address)": FunctionFragment;
@@ -64,6 +66,10 @@ interface CODEInterface extends ethers.utils.Interface {
     values?: undefined,
   ): string;
   encodeFunctionData(
+    functionFragment: "DELEGATE_ROLE",
+    values?: undefined,
+  ): string;
+  encodeFunctionData(
     functionFragment: "DOMAIN_SEPARATOR",
     values?: undefined,
   ): string;
@@ -92,6 +98,10 @@ interface CODEInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "checkpoints",
     values: [string, BigNumberish],
+  ): string;
+  encodeFunctionData(
+    functionFragment: "claim_delegate",
+    values: [string, string],
   ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
@@ -197,6 +207,10 @@ interface CODEInterface extends ethers.utils.Interface {
     data: BytesLike,
   ): Result;
   decodeFunctionResult(
+    functionFragment: "DELEGATE_ROLE",
+    data: BytesLike,
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "DOMAIN_SEPARATOR",
     data: BytesLike,
   ): Result;
@@ -212,6 +226,10 @@ interface CODEInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "burnFrom", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "checkpoints",
+    data: BytesLike,
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "claim_delegate",
     data: BytesLike,
   ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
@@ -399,6 +417,8 @@ export class CODE extends BaseContract {
   functions: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<[string]>;
 
+    DELEGATE_ROLE(overrides?: CallOverrides): Promise<[string]>;
+
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<[string]>;
 
     MINTER_ROLE(overrides?: CallOverrides): Promise<[string]>;
@@ -435,6 +455,12 @@ export class CODE extends BaseContract {
       pos: BigNumberish,
       overrides?: CallOverrides,
     ): Promise<[[number, BigNumber] & { fromBlock: number; votes: BigNumber }]>;
+
+    claim_delegate(
+      _delegator: string,
+      _delegatee: string,
+      overrides?: Overrides & { from?: string | Promise<string> },
+    ): Promise<ContractTransaction>;
 
     decimals(overrides?: CallOverrides): Promise<[number]>;
 
@@ -570,6 +596,8 @@ export class CODE extends BaseContract {
 
   DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
+  DELEGATE_ROLE(overrides?: CallOverrides): Promise<string>;
+
   DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
   MINTER_ROLE(overrides?: CallOverrides): Promise<string>;
@@ -606,6 +634,12 @@ export class CODE extends BaseContract {
     pos: BigNumberish,
     overrides?: CallOverrides,
   ): Promise<[number, BigNumber] & { fromBlock: number; votes: BigNumber }>;
+
+  claim_delegate(
+    _delegator: string,
+    _delegatee: string,
+    overrides?: Overrides & { from?: string | Promise<string> },
+  ): Promise<ContractTransaction>;
 
   decimals(overrides?: CallOverrides): Promise<number>;
 
@@ -738,6 +772,8 @@ export class CODE extends BaseContract {
   callStatic: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
+    DELEGATE_ROLE(overrides?: CallOverrides): Promise<string>;
+
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<string>;
 
     MINTER_ROLE(overrides?: CallOverrides): Promise<string>;
@@ -771,6 +807,12 @@ export class CODE extends BaseContract {
       pos: BigNumberish,
       overrides?: CallOverrides,
     ): Promise<[number, BigNumber] & { fromBlock: number; votes: BigNumber }>;
+
+    claim_delegate(
+      _delegator: string,
+      _delegatee: string,
+      overrides?: CallOverrides,
+    ): Promise<void>;
 
     decimals(overrides?: CallOverrides): Promise<number>;
 
@@ -1057,6 +1099,8 @@ export class CODE extends BaseContract {
   estimateGas: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
+    DELEGATE_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
+
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<BigNumber>;
 
     MINTER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1092,6 +1136,12 @@ export class CODE extends BaseContract {
       account: string,
       pos: BigNumberish,
       overrides?: CallOverrides,
+    ): Promise<BigNumber>;
+
+    claim_delegate(
+      _delegator: string,
+      _delegatee: string,
+      overrides?: Overrides & { from?: string | Promise<string> },
     ): Promise<BigNumber>;
 
     decimals(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1234,6 +1284,8 @@ export class CODE extends BaseContract {
       overrides?: CallOverrides,
     ): Promise<PopulatedTransaction>;
 
+    DELEGATE_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     DOMAIN_SEPARATOR(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     MINTER_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1272,6 +1324,12 @@ export class CODE extends BaseContract {
       account: string,
       pos: BigNumberish,
       overrides?: CallOverrides,
+    ): Promise<PopulatedTransaction>;
+
+    claim_delegate(
+      _delegator: string,
+      _delegatee: string,
+      overrides?: Overrides & { from?: string | Promise<string> },
     ): Promise<PopulatedTransaction>;
 
     decimals(overrides?: CallOverrides): Promise<PopulatedTransaction>;

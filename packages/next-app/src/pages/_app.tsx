@@ -18,6 +18,9 @@ switch (chainName.toLowerCase().trim()) {
   case "rinkeby":
     chains.push(chain.rinkeby);
     break;
+  case "goerli":
+    chains.push(chain.goerli);
+    break;
   case "mainnet":
     chains.push(chain.mainnet);
     break;
@@ -56,6 +59,10 @@ const provider = ({ chainId, connector }: GetProviderArgs) => {
       return new ethers.providers.JsonRpcProvider(localRpcUrl);
     case "rinkeby":
       return ethers.getDefaultProvider(chain.rinkeby.id, {
+        infura: infuraId,
+      });
+    case "goerli":
+      return ethers.getDefaultProvider(chain.goerli.id, {
         infura: infuraId,
       });
     case "mainnet":

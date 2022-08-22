@@ -2,7 +2,756 @@
 
 exports[`renders homepage unchanged 1`] = `
 Array [
-  <div>
+  .emotion-0 {
+  margin: 0px;
+  width: 100vw;
+  height: 100vh;
+  background: var(--chakra-colors-white);
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+}
+
+@media screen and (min-width: 62em) {
+  .emotion-0 {
+    scroll-snap-type: none;
+    overflow-y: clip;
+  }
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: 100vh;
+}
+
+.emotion-2 {
+  width: 100vw;
+  height: 100vh;
+  margin: 0px;
+  padding-left: 24px;
+  padding-right: 24px;
+  background: #08010D;
+  scroll-snap-align: start;
+  position: relative;
+  z-index: 1;
+}
+
+@media screen and (min-width: 30em) {
+  .emotion-2 {
+    padding-left: 5vw;
+    padding-right: 8vw;
+  }
+}
+
+@media screen and (min-width: 62em) {
+  .emotion-2 {
+    width: 50vw;
+    scroll-snap-align: none;
+  }
+}
+
+.emotion-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 32px;
+}
+
+@media screen and (min-width: 30em) {
+  .emotion-3 {
+    margin-top: 48px;
+  }
+}
+
+.emotion-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-5 {
+  width: 48px;
+  height: 48px;
+  margin-right: 16px;
+}
+
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: var(--chakra-sizes-full);
+}
+
+.emotion-7 {
+  width: 100%;
+  margin-top: -120px;
+}
+
+.emotion-8 {
+  font-family: var(--chakra-fonts-heading);
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 1.33;
+  color: var(--chakra-colors-white);
+}
+
+@media screen and (min-width: 30em) {
+  .emotion-8 {
+    font-size: 96px;
+  }
+}
+
+@media screen and (min-width: 48em) {
+  .emotion-8 {
+    line-height: 1.2;
+  }
+}
+
+.emotion-9 {
+  margin-top: 5vh;
+  margin-bottom: 7vh;
+  line-height: 40px;
+  color: var(--chakra-colors-white);
+  font-size: 20px;
+  font-weight: 500;
+  max-width: var(--chakra-sizes-2xl);
+}
+
+@media screen and (min-width: 30em) {
+  .emotion-9 {
+    margin-top: 48px;
+    margin-bottom: 60px;
+    font-size: 24px;
+  }
+}
+
+.emotion-10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 30em) {
+  .emotion-10 {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+}
+
+.emotion-11 {
+  margin-bottom: var(--chakra-space-4);
+  margin-right: 0px;
+  width: 100%;
+}
+
+@media screen and (min-width: 30em) {
+  .emotion-11 {
+    margin-bottom: 0px;
+    margin-right: var(--chakra-space-6);
+    width: inherit;
+  }
+}
+
+.emotion-12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: var(--chakra-sizes-full);
+}
+
+.emotion-12>*:not(style)~*:not(style) {
+  margin-top: 0px;
+  -webkit-margin-end: 0px;
+  margin-inline-end: 0px;
+  margin-bottom: 0px;
+  -webkit-margin-start: 0.5rem;
+  margin-inline-start: 0.5rem;
+}
+
+.emotion-13 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: middle;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  width: var(--chakra-sizes-full);
+  line-height: 1.2em;
+  border-radius: 0.65rem;
+  font-weight: 900;
+  transition-property: var(--chakra-transition-property-common);
+  transition-duration: var(--chakra-transition-duration-normal);
+  height: 56px;
+  min-width: var(--chakra-sizes-10);
+  font-size: 16px;
+  -webkit-padding-start: var(--chakra-space-4);
+  padding-inline-start: var(--chakra-space-4);
+  -webkit-padding-end: var(--chakra-space-4);
+  padding-inline-end: var(--chakra-space-4);
+  background: var(--chakra-colors-gray-100);
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #fff;
+  padding: 0 2.5rem;
+}
+
+@media screen and (min-width: 30em) {
+  .emotion-13 {
+    line-height: 1.4em;
+    font-size: 18px;
+  }
+}
+
+.emotion-13:focus,
+.emotion-13[data-focus] {
+  box-shadow: var(--chakra-shadows-outline);
+}
+
+.emotion-13[disabled],
+.emotion-13[aria-disabled=true],
+.emotion-13[data-disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: var(--chakra-shadows-none);
+}
+
+.emotion-13:hover,
+.emotion-13[data-hover] {
+  -webkit-transform: translate3d(0px, -2px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  -moz-transform: translate3d(0px, -2px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  -ms-transform: translate3d(0px, -2px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform: translate3d(0px, -2px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform-style: preserve-3d;
+}
+
+.emotion-14 {
+  margin-top: calc(var(--chakra-space-0\\.5) * -1);
+}
+
+.emotion-15 {
+  transition-property: var(--chakra-transition-property-common);
+  transition-duration: var(--chakra-transition-duration-fast);
+  transition-timing-function: var(--chakra-transition-easing-ease-out);
+  cursor: pointer;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  color: inherit;
+}
+
+.emotion-15:hover,
+.emotion-15[data-hover] {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.emotion-15:focus,
+.emotion-15[data-focus] {
+  box-shadow: var(--chakra-shadows-outline);
+}
+
+.emotion-16 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: middle;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  width: 100%;
+  line-height: 1.2em;
+  border-radius: 0.65rem;
+  font-weight: 900;
+  transition-property: var(--chakra-transition-property-common);
+  transition-duration: var(--chakra-transition-duration-normal);
+  height: 56px;
+  min-width: var(--chakra-sizes-10);
+  font-size: 16px;
+  -webkit-padding-start: var(--chakra-space-4);
+  padding-inline-start: var(--chakra-space-4);
+  -webkit-padding-end: var(--chakra-space-4);
+  padding-inline-end: var(--chakra-space-4);
+  background: var(--chakra-colors-gray-100);
+  background-color: var(--chakra-colors-transparent);
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 0 2.5rem;
+}
+
+@media screen and (min-width: 30em) {
+  .emotion-16 {
+    line-height: 1.4em;
+    font-size: 18px;
+    width: inherit;
+  }
+}
+
+.emotion-16:focus,
+.emotion-16[data-focus] {
+  box-shadow: var(--chakra-shadows-outline);
+}
+
+.emotion-16[disabled],
+.emotion-16[aria-disabled=true],
+.emotion-16[data-disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: var(--chakra-shadows-none);
+}
+
+.emotion-16:hover,
+.emotion-16[data-hover] {
+  -webkit-transform: translate3d(0px, -2px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  -moz-transform: translate3d(0px, -2px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  -ms-transform: translate3d(0px, -2px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform: translate3d(0px, -2px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform-style: preserve-3d;
+}
+
+.emotion-18 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.emotion-19 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0px;
+  background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),url("/assets/bg-art.svg");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+@media screen and (min-width: 62em) {
+  .emotion-19 {
+    width: 50vw;
+    scroll-snap-align: none;
+  }
+}
+
+.emotion-20 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.emotion-21 {
+  position: relative;
+  z-index: var(--chakra-zIndices-popover);
+}
+
+.emotion-22 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-backdrop-filter: blur(300px);
+  backdrop-filter: blur(300px);
+  background: rgba(255, 255, 255, 0.8);
+  border: 3px solid #DEDEDE;
+  border-radius: 24px;
+}
+
+@media screen and (min-width: 30em) {
+  .emotion-22 {
+    width: 560px;
+  }
+}
+
+.emotion-23 {
+  padding: 24px;
+}
+
+.emotion-25 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.emotion-26 {
+  background: var(--chakra-colors-gray-200);
+  width: 100px;
+  height: 100px;
+  border-radius: 16px;
+}
+
+@media screen and (min-width: 30em) {
+  .emotion-26 {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+.emotion-27 {
+  width: 52px;
+  height: 52px;
+  position: absolute;
+}
+
+@media screen and (min-width: 30em) {
+  .emotion-27 {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+.emotion-28 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-left: 24px;
+}
+
+.emotion-29 {
+  color: #08010D;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+@media screen and (min-width: 30em) {
+  .emotion-29 {
+    font-size: 42px;
+  }
+}
+
+.emotion-30 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-bottom: var(--chakra-space-8);
+}
+
+.emotion-31 {
+  border: 1px solid #08010D;
+  opacity: 8%;
+}
+
+.emotion-32 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  justify-content: space-evenly;
+  height: var(--chakra-sizes-48);
+}
+
+.emotion-34 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.emotion-35 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: baseline;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  -webkit-padding-start: 24px;
+  padding-inline-start: 24px;
+  -webkit-padding-end: 24px;
+  padding-inline-end: 24px;
+}
+
+.emotion-36 {
+  color: #4E4853;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.emotion-37 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  justify-self: stretch;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  height: var(--chakra-sizes-1);
+}
+
+.emotion-38 {
+  color: #4E4853;
+  font-family: IBM Plex Mono;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.emotion-52 {
+  margin-top: var(--chakra-space-6);
+}
+
+.emotion-55 {
+  color: #08010D;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.emotion-57 {
+  color: #08010D;
+  font-family: IBM Plex Mono;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.emotion-58 {
+  -webkit-padding-start: 24px;
+  padding-inline-start: 24px;
+  -webkit-padding-end: 24px;
+  padding-inline-end: 24px;
+  padding-bottom: 24px;
+}
+
+.emotion-59 {
+  background: var(--chakra-colors-gray-200);
+  border-radius: 12px;
+  width: 100%;
+  height: 56px;
+  margin-top: 24px;
+}
+
+.emotion-60 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  top: 48px;
+  left: 24px;
+  right: 24px;
+}
+
+@media screen and (min-width: 30em) {
+  .emotion-60 {
+    left: 5vw;
+    right: 5vw;
+  }
+}
+
+.emotion-61 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  justify-self: stretch;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+}
+
+.emotion-63 {
+  transition-property: var(--chakra-transition-property-common);
+  transition-duration: var(--chakra-transition-duration-fast);
+  transition-timing-function: var(--chakra-transition-easing-ease-out);
+  cursor: pointer;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  color: inherit;
+  display: block;
+  position: relative;
+}
+
+.emotion-63:hover::after,
+.emotion-63[data-hover]::after {
+  opacity: 1;
+  -webkit-transform: translate3d(0, -0.2em, 0);
+  -moz-transform: translate3d(0, -0.2em, 0);
+  -ms-transform: translate3d(0, -0.2em, 0);
+  transform: translate3d(0, -0.2em, 0);
+}
+
+.emotion-63:focus,
+.emotion-63[data-focus] {
+  box-shadow: var(--chakra-shadows-outline);
+}
+
+.emotion-63::after {
+  content: "";
+  position: absolute;
+  bottom: -0.7em;
+  left: 5%;
+  width: 90%;
+  height: 0.12em;
+  background-color: #08010D;
+  border-radius: 0.06em;
+  opacity: 0;
+  -webkit-transition: opacity 200ms,-webkit-transform 200ms;
+  transition: opacity 200ms,transform 200ms;
+}
+
+.emotion-64 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #08010D;
+}
+
+.emotion-65 {
+  margin-left: 60px;
+}
+
+<div>
     <canvas
       height={0}
       style={
@@ -19,90 +768,94 @@ Array [
       width={0}
     />
     <div
-      className="css-13472xl"
+      className="emotion-0"
     >
       <div
-        className="css-w2otz0"
+        className="emotion-1"
       >
         <div
-          className="css-1107s9w"
+          className="emotion-2"
         >
           <div
-            className="css-j3c8bm"
+            className="emotion-3"
           >
             <div
-              className="css-70qvj9"
+              className="emotion-4"
             >
               <img
                 alt="Developer DAO logo"
-                className="chakra-image css-unb7qf"
+                className="chakra-image emotion-5"
                 src="assets/devdao-logo.svg"
               />
             </div>
           </div>
           <div
-            className="css-1id13ok"
+            className="emotion-6"
           >
-            <h1
-              className="chakra-heading css-1nyswaf"
-            >
-              Airdrop
-            </h1>
-            <p
-              className="chakra-text css-1o3hbk9"
-            >
-              $CODE is the new governance token for Developer DAO. Connect your wallet to determine your airdrop eligibility.
-            </p>
             <div
-              className="css-obc5ee"
+              className="emotion-7"
             >
+              <h1
+                className="chakra-heading emotion-8"
+              >
+                Airdrop
+              </h1>
+              <p
+                className="chakra-text emotion-9"
+              >
+                $CODE is the new governance token for Developer DAO. Connect your wallet to determine your airdrop eligibility.
+              </p>
               <div
-                className="css-16pvocw"
+                className="emotion-10"
               >
                 <div
-                  className="chakra-stack css-1d0c3h9"
+                  className="emotion-11"
+                >
+                  <div
+                    className="chakra-stack emotion-12"
+                  >
+                    <button
+                      className="chakra-button emotion-13"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <div
+                        className="emotion-14"
+                      >
+                        CONNECT WALLET
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <a
+                  className="chakra-link emotion-15"
+                  href="https://developerdao.notion.site/The-CODE-Token-3c1e14dbc6bd461fa07978bf37d04fd9"
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   <button
-                    className="chakra-button css-1aknvb1"
-                    onClick={[Function]}
+                    className="chakra-button emotion-16"
                     type="button"
                   >
                     <div
-                      className="css-1jqno4x"
+                      className="emotion-14"
                     >
-                      CONNECT WALLET
+                      LEARN MORE
                     </div>
                   </button>
-                </div>
+                </a>
               </div>
-              <a
-                className="chakra-link css-f4h6uy"
-                href="https://developerdao.notion.site/The-CODE-Token-3c1e14dbc6bd461fa07978bf37d04fd9"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <button
-                  className="chakra-button css-oqzrty"
-                  type="button"
-                >
-                  <div
-                    className="css-1jqno4x"
-                  >
-                    LEARN MORE
-                  </div>
-                </button>
-              </a>
             </div>
           </div>
           <div
-            className="css-1mmifiz"
+            className="emotion-18"
           />
         </div>
         <div
-          className="css-1s92duk"
+          className="emotion-19"
         >
           <div
-            className="css-ixvcpa"
+            className="emotion-20"
           />
           <div
             className="chakra-offset-slide"
@@ -114,26 +867,35 @@ Array [
             }
           >
             <div
-              className="css-7u7k82"
+              className="emotion-21"
             >
               <div
                 box-shadow="inset 0px 0px 100px rgba(255, 255, 255, 0.25)"
-                className="css-m1gti1"
+                className="emotion-22"
               >
                 <div
-                  className="css-19kzrtu"
+                  className="emotion-23"
                 >
                   <div
-                    className="css-70qvj9"
+                    className="emotion-4"
                   >
                     <div
-                      className="css-qqeux9"
-                    />
+                      className="emotion-25"
+                    >
+                      <div
+                        className="emotion-26"
+                      />
+                      <img
+                        alt="check"
+                        className="chakra-image emotion-27"
+                        src="assets/placeholder-avatar.svg"
+                      />
+                    </div>
                     <div
-                      className="css-1wc4c43"
+                      className="emotion-28"
                     >
                       <p
-                        className="chakra-text css-fh9fau"
+                        className="chakra-text emotion-29"
                       >
                         
                       </p>
@@ -141,33 +903,33 @@ Array [
                   </div>
                 </div>
                 <div
-                  className="css-1tm2m9e"
+                  className="emotion-30"
                 >
                   <div
-                    className="css-1f7ccr8"
+                    className="emotion-31"
                   />
                   <div
-                    className="css-zl1avt"
+                    className="emotion-32"
                   >
                     <div
-                      className="css-0"
+                      className="emotion-33"
                     >
                       <div
-                        className="css-j7qwjs"
+                        className="emotion-34"
                       >
                         <div
-                          className="css-xokn3q"
+                          className="emotion-35"
                         >
                           <p
-                            className="chakra-text css-16rgb2m"
+                            className="chakra-text emotion-36"
                           >
                             Minted D4R NFT
                           </p>
                           <div
-                            className="css-50ft43"
+                            className="emotion-37"
                           />
                           <p
-                            className="chakra-text css-owpb89"
+                            className="chakra-text emotion-38"
                           >
                             0
                           </p>
@@ -175,24 +937,24 @@ Array [
                       </div>
                     </div>
                     <div
-                      className="css-0"
+                      className="emotion-33"
                     >
                       <div
-                        className="css-j7qwjs"
+                        className="emotion-34"
                       >
                         <div
-                          className="css-xokn3q"
+                          className="emotion-35"
                         >
                           <p
-                            className="chakra-text css-16rgb2m"
+                            className="chakra-text emotion-36"
                           >
                             Pre Season 0 activity
                           </p>
                           <div
-                            className="css-50ft43"
+                            className="emotion-37"
                           />
                           <p
-                            className="chakra-text css-owpb89"
+                            className="chakra-text emotion-38"
                           >
                             0
                           </p>
@@ -200,24 +962,24 @@ Array [
                       </div>
                     </div>
                     <div
-                      className="css-0"
+                      className="emotion-33"
                     >
                       <div
-                        className="css-j7qwjs"
+                        className="emotion-34"
                       >
                         <div
-                          className="css-xokn3q"
+                          className="emotion-35"
                         >
                           <p
-                            className="chakra-text css-16rgb2m"
+                            className="chakra-text emotion-36"
                           >
                             Early Contributor
                           </p>
                           <div
-                            className="css-50ft43"
+                            className="emotion-37"
                           />
                           <p
-                            className="chakra-text css-owpb89"
+                            className="chakra-text emotion-38"
                           >
                             0
                           </p>
@@ -226,27 +988,27 @@ Array [
                     </div>
                   </div>
                   <div
-                    className="css-1f7ccr8"
+                    className="emotion-31"
                   />
                   <div
-                    className="css-14bs28v"
+                    className="emotion-52"
                   >
                     <div
-                      className="css-j7qwjs"
+                      className="emotion-34"
                     >
                       <div
-                        className="css-xokn3q"
+                        className="emotion-35"
                       >
                         <p
-                          className="chakra-text css-11aqlj8"
+                          className="chakra-text emotion-55"
                         >
                           $CODE allocation
                         </p>
                         <div
-                          className="css-50ft43"
+                          className="emotion-37"
                         />
                         <p
-                          className="chakra-text css-11pmp78"
+                          className="chakra-text emotion-57"
                         >
                           0
                         </p>
@@ -255,10 +1017,10 @@ Array [
                   </div>
                 </div>
                 <div
-                  className="css-1ibed16"
+                  className="emotion-58"
                 >
                   <div
-                    className="css-1fh5nm1"
+                    className="emotion-59"
                   />
                 </div>
               </div>
@@ -267,22 +1029,22 @@ Array [
         </div>
       </div>
       <div
-        className="css-alkhma"
+        className="emotion-60"
       >
         <div
-          className="css-17xejub"
+          className="emotion-61"
         />
         <div
-          className="css-70qvj9"
+          className="emotion-4"
         >
           <a
-            className="chakra-link css-9si2gb"
+            className="chakra-link emotion-63"
             href="https://github.com/Developer-DAO/code-claim-site"
             rel="noopener noreferrer"
             target="_blank"
           >
             <p
-              className="chakra-text css-1uzh1ux"
+              className="chakra-text emotion-64"
             >
               Contract
             </p>
@@ -299,32 +1061,32 @@ Array [
             }
           />
           <div
-            className="css-vyb7xx"
+            className="emotion-65"
           >
             <a
-              className="chakra-link css-9si2gb"
+              className="chakra-link emotion-63"
               href="https://discord.gg/devdao"
               rel="noopener noreferrer"
               target="_blank"
             >
               <p
-                className="chakra-text css-1uzh1ux"
+                className="chakra-text emotion-64"
               >
                 Discord
               </p>
             </a>
           </div>
           <div
-            className="css-vyb7xx"
+            className="emotion-65"
           >
             <a
-              className="chakra-link css-9si2gb"
+              className="chakra-link emotion-63"
               href="https://twitter.com/developer_dao"
               rel="noopener noreferrer"
               target="_blank"
             >
               <p
-                className="chakra-text css-1uzh1ux"
+                className="chakra-text emotion-64"
               >
                 Twitter
               </p>

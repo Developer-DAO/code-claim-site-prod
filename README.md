@@ -1,3 +1,5 @@
+[![MythXBadge](https://badgen.net/https/api.mythx.io/v1/projects/b24b61fa-1d1f-492c-aad9-8eb7bdbea289/badge/data?cache=300&icon=https://raw.githubusercontent.com/ConsenSys/mythx-github-badge/main/logo_white.svg)](https://docs.mythx.io/dashboard/github-badges)
+
 # DeveloperDAO $CODE contract & claim site
 
 A monorepo containing both the $CODE token contract & the claim web app.
@@ -30,18 +32,24 @@ Here is a list of the main scripts to run:
 
 - Default dev environment, esp. when working on the web app: `yarn dev`
 - Spin-up the storybook for isolated UI development: `yarn storybook`
-- This will create the Merkle Tree: `yarn execute localhost scripts/getMerkleRoot data/nft_holders.json data/votes_and_poap_holders.json`
-- This script sets the merkle root hash on the contract: `yarn execute localhost scripts/setMerkleRoot`
+- This will create the Merkle Tree: `yarn execute localhost scripts/getMerkleRoot data/nft_holders.json data/votes_and_poap_holders.json data/final_early_contributor_amounts.json`
+- This script sets the merkle root hash on the contract: `yarn execute localhost scripts/setMerkleRoot.ts <merkle root>`
+
+### Generating Airdrop Data
+
+Before deployment, we need to generate airdrop data first
+
+1. `./generate-airdrop.sh rinkeby` the script use `mainnet` as the default network
+2. Copy inner JSON data from `packages/hardhat/data/out/airdrop_ui_rinkeby.json` into the airdrop item in `packages/next-app/src/data/airdrop.ts`
 
 ### Deploying
 
-To deploy to Rinkeby, these are the steps:
+To deploy to **Mainnet**, these are the steps:
 
 1. Set env vars ETH_NODE_URI = 'https://rinkeby.infura.io/v3/$projectId' (or other node services e.g. alchemy, quicknode), MNEMONIC = 'words words words.... words'
-2. `yarn deploy rinkeby`
-3. `yarn execute rinkeby scripts/setMerkleRoot <merkleRoot>`
-4. `cd packages/hardhat && npx hardhat --network rinkeby etherscan-verify --api-key <etherscan API key>`
-5. `yarn execute rinkeby scripts/merkleRootSanityCheck`
+2. `yarn deploy mainnet`
+3. `cd packages/hardhat && npx hardhat --network mainnet etherscan-verify --api-key <etherscan API key>`
+4. `yarn execute mainnet scripts/merkleRootSanityCheck`
 
 The code that gets network specific resources from env variables (like ETH_NODE_URI and MNEMONIC) is located at `packages/hardhat/utils/network.ts`.
 To change how e.g. the accounts are defined (by setting PKs directly instead of using mnemonic), the `accounts` function in that file would need to be changed. This function is then used in hardhat.config.ts to get the accounts info per network.

@@ -24,6 +24,7 @@ const setup = deployments.createFixture(async () => {
   await mockERC721.deployed();
 
   const unnamedAccounts = await getUnnamedAccounts();
+
   const airdrop = {
     [unnamedAccounts[1]]: 100,
     [unnamedAccounts[2]]: 200,
@@ -39,9 +40,10 @@ const setup = deployments.createFixture(async () => {
   const users = await setupUsers(unnamedAccounts, { ClaimCODE });
 
   const { treasury } = await getNamedAccounts();
+  const codeAdmin = await CODE.connect(await ethers.getSigner(treasury));
   const treasuryOwnedClaimCODE = await ClaimCODE.connect(await ethers.getSigner(treasury));
 
-  await treasuryOwnedClaimCODE.setMerkleRoot(merkleRoot);
+  await treasuryOwnedClaimCODE.unpause();
 
   await mockERC721.mintTo(treasury);
   const treasuryOwnedNFT = await mockERC721.connect(await ethers.getSigner(treasury));
@@ -50,6 +52,7 @@ const setup = deployments.createFixture(async () => {
   return {
     CODE,
     ClaimCODE,
+    codeAdmin,
     mockERC20,
     mockERC721,
     treasuryOwnedClaimCODE,
@@ -66,8 +69,8 @@ describe('Claim CODE', function () {
     const { treasury } = await getNamedAccounts();
     const treasuryBalance = await CODE.balanceOf(treasury);
     const airdropBalance = await CODE.balanceOf(ClaimCODE.address);
-    expect(treasuryBalance).to.equal(ethers.utils.parseUnits((6_500_000).toString(), TOKEN_DECIMALS));
-    expect(airdropBalance).to.equal(ethers.utils.parseUnits((3_500_000).toString(), TOKEN_DECIMALS));
+    expect(treasuryBalance).to.equal(ethers.utils.parseUnits((6_600_000).toString(), TOKEN_DECIMALS));
+    expect(airdropBalance).to.equal(ethers.utils.parseUnits((3_400_000).toString(), TOKEN_DECIMALS));
   });
 
   it('Deployment should assign treasury as the owner of claim contract', async function () {
@@ -77,8 +80,24 @@ describe('Claim CODE', function () {
     expect(treasury).to.equal(owner);
   });
 
+  it('Deployment should revoke admin role of deployer & leave only treasury as admin', async function () {
+    const { CODE } = await setup();
+    const { deployer, treasury } = await getNamedAccounts();
+    const adminRole = await CODE.DEFAULT_ADMIN_ROLE();
+    const deployerHasAdminRole = await CODE.hasRole(adminRole, deployer);
+    const treasuryHasAdminRole = await CODE.hasRole(adminRole, treasury);
+    expect(deployerHasAdminRole).to.equal(false);
+    expect(treasuryHasAdminRole).to.equal(true);
+  });
+
+  it('Deployment should set the correct Merkle Root', async function () {
+    const { ClaimCODE, merkleRoot } = await setup();
+    const merkleRootOnContract = await ClaimCODE.merkleRoot();
+    expect(merkleRootOnContract).to.equal(merkleRoot);
+  });
+
   it('cannot claim if no allocation', async function () {
-    const { users, merkleTree } = await setup();
+    const { CODE, users, merkleTree } = await setup();
 
     // Get properly formatted address
     const formattedAddress: string = ethers.utils.getAddress(users[0].address);
@@ -92,10 +111,12 @@ describe('Claim CODE', function () {
     const proof: string[] = merkleTree.getHexProof(leaf);
 
     await expect(users[0].ClaimCODE.claimTokens(numTokens, proof)).to.be.revertedWith('InvalidProof()');
+    const delegatee = await CODE.delegates(users[0].address);
+    expect(delegatee).to.equal('0x0000000000000000000000000000000000000000'); // failed to delegate of failure of claim
   });
 
   it('can claim correct allocation amount only', async function () {
-    const { users, merkleProof, merkleRoot, merkleTree, CODE, ClaimCODE } = await setup();
+    const { users, merkleProof, merkleRoot, merkleTree, CODE, ClaimCODE, codeAdmin } = await setup();
 
     // Get tokens for address correctly
     const correctFormattedAddress: string = ethers.utils.getAddress(users[1].address);
@@ -108,21 +129,41 @@ describe('Claim CODE', function () {
     const isClaimed = await ClaimCODE.isClaimed(correctIndex);
     expect(isClaimed).to.be.false;
 
+    const userBalance = await CODE.balanceOf(users[1].address);
+    expect(userBalance).to.equal(ethers.utils.parseUnits((0).toString(), TOKEN_DECIMALS));
+
+    const delegatee = await CODE.delegates(users[1].address);
+    expect(delegatee).to.equal('0x0000000000000000000000000000000000000000'); // no delegatee
+
+    const delegateRole = await CODE.DELEGATE_ROLE();
+    await codeAdmin.revokeRole(delegateRole, ClaimCODE.address);
+
+    // CODE delegation is guarded by DELEGATE_ROLE
+    await expect(users[1].ClaimCODE.claimTokens(correctNumTokens, correctProof)).to.be.revertedWith(
+      `AccessControl: account ${ClaimCODE.address.toLowerCase()} is missing role ${delegateRole}`
+    );
+
+    await codeAdmin.grantRole(delegateRole, ClaimCODE.address);
+
     await expect(users[1].ClaimCODE.claimTokens(correctNumTokens, correctProof))
       .to.emit(ClaimCODE, 'Claim')
       .withArgs(correctFormattedAddress, ethers.utils.parseUnits((100).toString(), TOKEN_DECIMALS));
 
-    const userBalance = await CODE.balanceOf(users[1].address);
-    expect(userBalance).to.equal(ethers.utils.parseUnits((100).toString(), TOKEN_DECIMALS));
+    const userBalanceAfter = await CODE.balanceOf(users[1].address);
+    expect(userBalanceAfter).to.equal(ethers.utils.parseUnits((100).toString(), TOKEN_DECIMALS));
 
     const isClaimedAfter = await ClaimCODE.isClaimed(correctIndex);
     expect(isClaimedAfter).to.be.true;
+
+    const delegateeAfter = await CODE.delegates(users[1].address);
+    expect(delegateeAfter).to.equal(users[1].address); // self delegation
 
     await expect(users[1].ClaimCODE.claimTokens(correctNumTokens, correctProof)).to.be.revertedWith('AlreadyClaimed()');
   });
 
   it('cannot claim if claim period ends', async function () {
-    const { users, merkleTree } = await setup();
+    const { CODE, users, merkleTree } = await setup();
+
     // Get properly formatted address
     const formattedAddress: string = ethers.utils.getAddress(users[1].address);
 
@@ -133,15 +174,12 @@ describe('Claim CODE', function () {
     const leaf: Buffer = generateLeaf(formattedAddress, numTokens);
     // Generate airdrop proof
     const proof: string[] = merkleTree.getHexProof(leaf);
-    const ninetyOneDays = 91 * 24 * 60 * 60;
-    await ethers.provider.send('evm_increaseTime', [ninetyOneDays]);
+    const oneHundredEightyOneDays = 181 * 24 * 60 * 60;
+    await ethers.provider.send('evm_increaseTime', [oneHundredEightyOneDays]);
 
     await expect(users[1].ClaimCODE.claimTokens(numTokens, proof)).to.be.revertedWith('ClaimEnded()');
-  });
-
-  it('cannot reset merkleroot', async function () {
-    const { treasuryOwnedClaimCODE, merkleRoot } = await setup();
-    await expect(treasuryOwnedClaimCODE.setMerkleRoot(merkleRoot)).to.be.revertedWith('InitError()');
+    const delegatee = await CODE.delegates(users[1].address);
+    expect(delegatee).to.equal('0x0000000000000000000000000000000000000000'); // failed to delegate of failure of claim
   });
 
   it('cannot claim if contract is paused', async function () {
@@ -164,6 +202,9 @@ describe('Claim CODE', function () {
       'Pausable: paused'
     );
 
+    const delegatee = await CODE.delegates(users[1].address);
+    expect(delegatee).to.equal('0x0000000000000000000000000000000000000000'); // failed to delegate of failure of claim
+
     await treasuryOwnedClaimCODE.unpause();
 
     const isClaimed = await ClaimCODE.isClaimed(correctIndex);
@@ -172,6 +213,9 @@ describe('Claim CODE', function () {
     await expect(users[userId].ClaimCODE.claimTokens(correctNumTokens, correctProof))
       .to.emit(ClaimCODE, 'Claim')
       .withArgs(correctFormattedAddress, ethers.utils.parseUnits(userAmount.toString(), TOKEN_DECIMALS));
+
+    const delegateeAfter = await CODE.delegates(users[userId].address);
+    expect(delegateeAfter).to.equal(users[userId].address); // self delegation
 
     const userBalance = await CODE.balanceOf(users[userId].address);
     expect(userBalance).to.equal(ethers.utils.parseUnits(userAmount.toString(), TOKEN_DECIMALS));
@@ -188,8 +232,8 @@ describe('Claim CODE', function () {
 
     await expect(treasuryOwnedClaimCODE.sweep20(CODE.address)).to.be.revertedWith('ClaimNotEnded()');
 
-    const ninetyOneDays = 91 * 24 * 60 * 60;
-    await ethers.provider.send('evm_increaseTime', [ninetyOneDays]);
+    const oneHundredEightyOneDays = 181 * 24 * 60 * 60;
+    await ethers.provider.send('evm_increaseTime', [oneHundredEightyOneDays]);
 
     await treasuryOwnedClaimCODE.sweep20(CODE.address);
 

@@ -48,7 +48,7 @@ describe('CODE', function () {
     );
 
     const treasuryBalance = await CODE.balanceOf(treasury);
-    expect(treasuryBalance).to.equal(ethers.utils.parseUnits((6_500_000).toString(), TOKEN_DECIMALS));
+    expect(treasuryBalance).to.equal(ethers.utils.parseUnits((6_600_000).toString(), TOKEN_DECIMALS));
 
     const tc = await CODE.connect(await ethers.getSigner(treasury));
     await tc.grantRole(mintRole, deployer);
@@ -56,7 +56,7 @@ describe('CODE', function () {
     await dc.mint(treasury, ethers.utils.parseUnits((100_000).toString(), TOKEN_DECIMALS));
 
     const treasuryBalanceAfter = await CODE.balanceOf(treasury);
-    expect(treasuryBalanceAfter).to.equal(ethers.utils.parseUnits((6_600_000).toString(), TOKEN_DECIMALS));
+    expect(treasuryBalanceAfter).to.equal(ethers.utils.parseUnits((6_700_000).toString(), TOKEN_DECIMALS));
 
     await tc.revokeRole(mintRole, deployer);
 
@@ -109,7 +109,7 @@ describe('CODE', function () {
     expect(contractBalanceAfter).to.equal(0);
   });
 
-  it('ensure claim contract dont receive Ether', async function () {
+  it('ensure token contract dont receive Ether', async function () {
     const { treasuryOwnedCODE } = await setup();
     const [deployer] = await ethers.getSigners();
     console.log(
