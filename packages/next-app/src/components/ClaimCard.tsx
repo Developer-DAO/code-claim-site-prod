@@ -277,7 +277,7 @@ export const ClaimCard = ({
         <UnclaimedView
           cardState={cardState}
           positions={positions}
-          totalAllocation={totalAllocation.toString()}
+          totalAllocation={totalAllocation}
           onClickClaim={onClickClaim}
         />
       )}
